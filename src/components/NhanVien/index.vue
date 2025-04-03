@@ -1,6 +1,4 @@
-<template>
-  <P>Phước đẹp trai</P>
-</template>
+<template lang="">Phước đẹp trai</template>
 <script>
 export default {};
 </script>
