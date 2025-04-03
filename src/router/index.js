@@ -3,7 +3,25 @@ import { createRouter, createWebHistory } from "vue-router"; // cài vue-router:
 const routes = [
   {
     path: "/",
-    component: () => import("../components/NhanVien/index.vue"),
+    component: () => import("../components/NhanVien/Home/index.vue"),
+    meta: { layout: "client" },
+  },
+  {
+    path: "/nhan-vien/bao-cao-vang",
+    component: () => import("../components/NhanVien/BaoCaoVang/index.vue"),
+    meta: { layout: "client" },
+  },
+  {
+    path: "/nhan-vien/bao-hiem-phuc-loi",
+    component: () =>
+      import("../components/NhanVien/BaoHiemVaPhucLoi/index.vue"),
+    meta: { layout: "client" },
+  },
+  {
+    path: "/nhan-vien/tieu-chi-kpi",
+    component: () =>
+      import("../components/NhanVien/TieuChiKPI/index.vue"),
+    meta: { layout: "client" },
   },
 ];
 

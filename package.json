@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@meforma/vue-toaster": "^1.3.0",
+    "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
     "simplebar": "^6.3.0",
