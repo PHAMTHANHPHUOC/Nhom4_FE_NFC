@@ -16,12 +16,12 @@ export default function (to, from, next) {
       if (res.data.status) {
         next(); // Được phép đi qua
       } else {
-        next("/khach-hang/dang-nhap");
+        next("/quan-ly/dang-nhap");
         toaster.error("Thông báo<br>" + res.data.message);
       }
     })
     .catch(() => {
-      next("/khach-hang/dang-nhap");
+      next("/quan-ly/dang-nhap");
       toaster.error("Bạn phải đăng nhập nhé!");
     });
 }
