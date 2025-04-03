@@ -5,7 +5,7 @@ const toaster = createToaster({ position: "top-right" });
 
 export default {
   getHeader() {
-    let token = window.localStorage.getItem("chia_khoa_16");
+    let token = window.localStorage.getItem("chia_khoa");
     if (token == null) {
       return {};
     }

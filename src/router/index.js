@@ -1,21 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router"; // cài vue-router: npm install vue-router@next --save
-
+import kiemTranNhanVien from "./kiemTraNhanVien";
 const routes = [
   {
-    path: "/nhan-vien/bao-cao-vang",
-    component: () => import("../components/NhanVien/BaoCaoVang/index.vue"),
-    meta: { layout: "client" },
-  },
-  {
-    path: "/nhan-vien/bao-hiem-phuc-loi",
-    component: () =>
-      import("../components/NhanVien/BaoHiemVaPhucLoi/index.vue"),
-    meta: { layout: "client" },
-  },
-  {
-    path: "/nhan-vien/tieu-chi-kpi",
-    component: () => import("../components/NhanVien/TieuChiKPI/index.vue"),
-    meta: { layout: "client" },
+    path: "/",
+    component: () => import("../components/NhanVien/index.vue"),
   },
 ];
 
