@@ -50,13 +50,13 @@ const routes = [
   },
   {
     path: "/nhan-vien/ho-so",
-    component: () => import("../components/NhanVien/Profile/index.vue"),
+    component: () => import("../components/Admin/Profile/index.vue"),
     meta: { layout: "client" },
     beforeEnter: kiemTranNhanVien,
   },
   {
     path: "/nhan-vien/lich-lam-viec",
-    component: () => import("../components/NhanVien/LichLamViec/index.vue"),
+    component: () => import("../components/Admin/LichLamViec/index.vue"),
     meta: { layout: "client" },
     beforeEnter: kiemTranNhanVien,
   },

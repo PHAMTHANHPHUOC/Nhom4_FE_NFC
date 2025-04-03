@@ -81,7 +81,7 @@
               <div class="parent-icon">
                 <i class="fa-brands fa-product-hunt"></i>
               </div>
-              <div class="menu-title">Quản Lý Yêu Cầu Nghĩ Phép</div>
+              <div class="menu-title">Hồ Sơ Nhân Viên</div>
             </a>
           </router-link>
         </li>
@@ -91,7 +91,7 @@
               <div class="parent-icon">
                 <i class="fa-brands fa-product-hunt"></i>
               </div>
-              <div class="menu-title">Quản Lý Yêu Cầu Nghĩ Phép</div>
+              <div class="menu-title">Lịch Làm Việc</div>
             </a>
           </router-link>
         </li>
