@@ -39,20 +39,28 @@ export default {
     return axios
       .delete(apiUrl + url, { headers: this.getHeader() })
       .catch((res) => {
-        var list_error = Object.values(res.response.data.errors);
-        list_error.forEach((v, k) => {
-          toaster.error(v[0]);
-        });
+        if (res?.response?.data?.errors) {
+          var list_error = Object.values(res.response.data.errors);
+          list_error.forEach((v) => {
+            toaster.error(v[0]);
+          });
+        } else {
+          toaster.error(res?.response?.data?.message || "Có lỗi xảy ra");
+        }
       });
   },
   put(url, data) {
     return axios
       .put(apiUrl + url, data, { headers: this.getHeader() })
       .catch((res) => {
-        var list_error = Object.values(res.response.data.errors);
-        list_error.forEach((v, k) => {
-          toaster.error(v[0]);
-        });
+        if (res?.response?.data?.errors) {
+          var list_error = Object.values(res.response.data.errors);
+          list_error.forEach((v) => {
+            toaster.error(v[0]);
+          });
+        } else {
+          toaster.error(res?.response?.data?.message || "Có lỗi xảy ra");
+        }
       });
   },
 };
