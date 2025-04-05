@@ -60,6 +60,13 @@ const routes = [
     meta: { layout: "client" },
     beforeEnter: kiemTranNhanVien,
   },
+  {
+    path: "/quan-ly/bang-chuc-danh",
+    component: () =>
+      import("../components/Admin/BangChucDanh/QuanLyChucDanh.vue"),
+    meta: { layout: "client" },
+    beforeEnter: kiemTranNhanVien,
+  },
 ];
 
 const router = createRouter({
