@@ -89,6 +89,10 @@
                 </td>
                 <td class="text-center">
                   <div class="action-buttons">
+                    <button class="btn btn-sm btn-primary text-white action-btn" data-bs-toggle="modal"
+                      data-bs-target="#detailModal" @click="Object.assign(viewDetail, chucDanh)" title="Chi tiết">
+                      <i class="fas fa-info-circle"></i>
+                    </button>
                     <button class="btn btn-sm btn-info text-white action-btn" data-bs-toggle="modal"
                       data-bs-target="#updateModal" @click="Object.assign(update, chucDanh)" title="Sửa">
                       <i class="fas fa-edit"></i>
@@ -174,7 +178,6 @@
               <div class="input-group">
                 <input type="number" class="form-control" id="banLuong" v-model="update.ban_luong">
                 <span class="input-group-text">VND</span>
-
               </div>
             </div>
             <div class="form-group mb-3">
@@ -221,6 +224,82 @@
         </div>
       </div>
     </div>
+    <!-- modal detail -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="detailModalLabel">Chi tiết chức danh</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="detail-card">
+              <div class="detail-header mb-4">
+                <div class="d-flex align-items-center">
+                  <div class="detail-icon">
+                    <i class="fas fa-id-badge"></i>
+                  </div>
+                  <div class="ms-3">
+                    <h5 class="mb-1">{{ viewDetail.ten_chuc_danh }}</h5>
+                    <span :class="viewDetail.trang_thai ? 'badge-status active' : 'badge-status inactive'">
+                      <i :class="viewDetail.trang_thai ? 'fas fa-check-circle me-1' : 'fas fa-times-circle me-1'"></i>
+                      {{ viewDetail.trang_thai ? 'Hoạt động' : 'Không hoạt động' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-info">
+                <div class="detail-item">
+                  <div class="detail-label">
+                    <i class="fas fa-tag text-primary me-2"></i>
+                    Mã chức danh:
+                  </div>
+                  <div class="detail-value">{{ viewDetail.id_chuc_danh }}</div>
+                </div>
+
+                <div class="detail-item">
+                  <div class="detail-label">
+                    <i class="fas fa-money-bill-wave text-success me-2"></i>
+                    Bản lương:
+                  </div>
+                  <div class="detail-value fw-bold text-primary">{{ formatCurrency(viewDetail.ban_luong) }}</div>
+                </div>
+
+                <div class="detail-item">
+                  <div class="detail-label">
+                    <i class="fas fa-users text-info me-2"></i>
+                    Số lượng nhân viên:
+                  </div>
+                  <div class="detail-value">
+                    <span class="badge bg-info rounded-pill">{{ viewDetail.so_luong_nhan_vien }}</span>
+                  </div>
+                </div>
+
+                <div class="detail-item" v-if="viewDetail.created_at">
+                  <div class="detail-label">
+                    <i class="fas fa-calendar-plus text-secondary me-2"></i>
+                    Ngày tạo:
+                  </div>
+                  <div class="detail-value">{{ formatDate(viewDetail.created_at) }}</div>
+                </div>
+
+                <div class="detail-item" v-if="viewDetail.updated_at">
+                  <div class="detail-label">
+                    <i class="fas fa-calendar-alt text-secondary me-2"></i>
+                    Cập nhật lần cuối:
+                  </div>
+                  <div class="detail-value">{{ formatDate(viewDetail.updated_at) }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -246,6 +325,7 @@ export default {
         ban_luong: 0,
         trang_thai: 1
       },
+      viewDetail: {}, // Add this line for the detail view
       deleteBangChucDanh: {},
       searchTerm: '',
       statusFilter: 'all'
@@ -333,7 +413,18 @@ export default {
       this.searchTerm = '';
       this.statusFilter = 'all';
       this.fetchChucDanh(); // Fetch all data after reset
-    }
+    },
+    formatDate(dateString) {
+      if (!dateString) return '';
+      const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      };
+      return new Date(dateString).toLocaleDateString('vi-VN', options);
+    },
   }
 };
 </script>

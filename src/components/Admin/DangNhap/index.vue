@@ -65,11 +65,9 @@ export default {
     },
     actionDangNhap() {
       baseRequest.post("dang-nhap", this.khach_hang).then((res) => {
-        console.log(res.data.status);
         if (res.data.status == 200) {
           // Store the token from the correct location in the response
           localStorage.setItem("chia_khoa", res.data.data.chia_khoa);
-          console.log(res.data.data.chia_khoa);
           toaster.success(res.data.message);
           this.$router.push("/");
         }

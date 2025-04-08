@@ -62,8 +62,13 @@ const routes = [
   },
   {
     path: "/quan-ly/bang-chuc-danh",
-    component: () =>
-      import("../components/Admin/BangChucDanh/QuanLyChucDanh.vue"),
+    component: () => import("../components/Admin/BangChucDanh/index.vue"),
+    meta: { layout: "client" },
+    beforeEnter: kiemTranNhanVien,
+  },
+  {
+    path: "/quan-ly/phong-ban",
+    component: () => import("../components/Admin/PhongBan/index.vue"),
     meta: { layout: "client" },
     beforeEnter: kiemTranNhanVien,
   },
