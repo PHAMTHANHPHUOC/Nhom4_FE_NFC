@@ -106,10 +106,12 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="javascript:;">
-                <i class="bx bx-user"></i>
-                <span>Thông tin cá nhân</span>
-              </a>
+              <router-link to="/nhan-vien/ho-so">
+                <a class="dropdown-item" href="javascript:;">
+                  <i class="bx bx-user"></i>
+                  <span>Thông tin cá nhân</span>
+                </a>
+              </router-link>
             </li>
             <li>
               <div class="dropdown-divider mb-0"></div>
@@ -133,11 +135,16 @@ import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ position: "top-right" });
 
 export default {
-  name: "TopClient",
-  data() {
-    return {
-      searchQuery: "",
-    };
+  data() {},
+  mounted() {
+    this.loadDataKhachHang();
+  },
+  methods: {
+    loadDataProfile() {
+      baseRequestUser.get("khach-hang/thong-tin").then((res) => {
+        this.profile = res.data.data;
+      });
+    },
   },
 };
 </script>

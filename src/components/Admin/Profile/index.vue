@@ -48,8 +48,8 @@
                         <i class="fas fa-camera"></i>
                       </button>
                     </div>
-                    <h4 class="mt-3">{{ profile.ho_ten }}</h4>
-                    <p class="text-muted">{{ profile.chuc_vu }}</p>
+                    <h4 class="mt-3">{{ profile.ho_va_ten }}</h4>
+                    <p class="text-muted">{{ profile.ma_chuc_danh }}</p>
                     <div class="profile-stats">
                       <div class="row text-center">
                         <div class="col">
@@ -95,7 +95,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            v-model="profile.ho_ten"
+                            v-model="profile.ho_va_ten"
                           />
                         </div>
                         <div class="col-md-6">
@@ -125,16 +125,6 @@
                           />
                         </div>
                       </div>
-                      <div class="row mb-3">
-                        <div class="col-12">
-                          <label class="form-label">Địa Chỉ</label>
-                          <textarea
-                            class="form-control"
-                            v-model="profile.dia_chi"
-                            rows="2"
-                          ></textarea>
-                        </div>
-                      </div>
                       <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save me-2"></i>Lưu Thay Đổi
                       </button>
@@ -146,7 +136,7 @@
           </div>
 
           <!-- Security Tab -->
-          <div class="tab-pane fade" id="security" role="tabpanel">
+          <!-- <div class="tab-pane fade" id="security" role="tabpanel">
             <div class="row justify-content-center">
               <div class="col-md-8">
                 <div class="card">
@@ -205,10 +195,10 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Reports Tab -->
-          <div class="tab-pane fade" id="reports" role="tabpanel">
+          <!-- <div class="tab-pane fade" id="reports" role="tabpanel">
             <div class="row">
               <div class="col-md-6 col-lg-3 mb-4">
                 <div class="card bg-primary text-white">
@@ -268,14 +258,14 @@
               </div>
             </div>
 
-            <!-- Performance Chart -->
+           
             <div class="card mb-4">
               <div class="card-body">
                 <h5 class="card-title">Biểu Đồ Hiệu Suất</h5>
                 <canvas id="performanceChart" height="100"></canvas>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -283,78 +273,26 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
-import Chart from "chart.js/auto";
+import axios from "axios";
+import { createToaster } from "@meforma/vue-toaster";
+import baseRequest from "../../../core/baseRequest";
+const toaster = createToaster({ position: "top-right" });
+a;
 
 export default {
-  setup() {
-    const profile = ref({
-      ho_ten: "Nguyễn Văn A",
-      email: "nguyenvana@example.com",
-      so_dien_thoai: "0123456789",
-      ngay_sinh: "1990-01-01",
-      dia_chi: "Hà Nội",
-      chuc_vu: "Senior Developer",
-    });
-
-    const passwordForm = ref({
-      current: "",
-      new: "",
-      confirm: "",
-    });
-
-    const showPassword = ref(false);
-
-    const updateProfile = async () => {
-      try {
-        // API call to update profile
-        console.log("Profile updated");
-      } catch (error) {
-        console.error("Error updating profile:", error);
-      }
-    };
-
-    const changePassword = async () => {
-      try {
-        // API call to change password
-        console.log("Password changed");
-      } catch (error) {
-        console.error("Error changing password:", error);
-      }
-    };
-
-    const forgotPassword = () => {
-      // Handle forgot password logic
-      console.log("Forgot password");
-    };
-
-    onMounted(() => {
-      // Initialize performance chart
-      const ctx = document.getElementById("performanceChart");
-      new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: ["T1", "T2", "T3", "T4", "T5", "T6"],
-          datasets: [
-            {
-              label: "KPI",
-              data: [85, 88, 92, 89, 90, 95],
-              borderColor: "rgb(75, 192, 192)",
-              tension: 0.1,
-            },
-          ],
-        },
+  data() {
+    profile: {
+    }
+  },
+  mounted() {
+    this.loadDataProfile();
+  },
+  methods: {
+    loadDataProfile() {
+      baseRequest.get("khach-hang/thong-tin").then((res) => {
+        this.profile = res.data.data;
       });
-    });
-
-    return {
-      profile,
-      passwordForm,
-      showPassword,
-      updateProfile,
-      changePassword,
-      forgotPassword,
-    };
+    },
   },
 };
 </script>

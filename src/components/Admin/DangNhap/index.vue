@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import baseRequest from "../../../core/baseRequest";
 import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ position: "top-right" });
