@@ -4,22 +4,12 @@
       <div class="card-body">
         <ul class="nav nav-tabs nav-primary" role="tablist">
           <li class="nav-item" role="presentation">
-            <a
-              class="nav-link active"
-              data-bs-toggle="tab"
-              href="#profile"
-              role="tab"
-            >
+            <a class="nav-link active" data-bs-toggle="tab" href="#profile" role="tab">
               <i class="fas fa-user me-2"></i>Thông Tin Cá Nhân
             </a>
           </li>
           <li class="nav-item" role="presentation">
-            <a
-              class="nav-link"
-              data-bs-toggle="tab"
-              href="#security"
-              role="tab"
-            >
+            <a class="nav-link" data-bs-toggle="tab" href="#security" role="tab">
               <i class="fas fa-shield-alt me-2"></i>Bảo Mật
             </a>
           </li>
@@ -40,16 +30,13 @@
                     <div class="position-relative d-inline-block">
                       <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnO0uhwiK1yDASJ6SkO3SLFNU3dtIb4NMiBA&s"
-                        alt="Quản trị viên"
-                        class="rounded-circle p-1 bg-primary"
-                        width="110"
-                      />
+                        alt="Quản trị viên" class="rounded-circle p-1 bg-primary" width="110" />
                       <button class="btn btn-sm btn-primary avatar-edit-btn">
                         <i class="fas fa-camera"></i>
                       </button>
                     </div>
                     <h4 class="mt-3">{{ profile.ho_va_ten }}</h4>
-                    <p class="text-muted">{{ profile.ma_chuc_danh }}</p>
+                    <p class="text-muted">{{ profile.email }}</p>
                     <div class="profile-stats">
                       <div class="row text-center">
                         <div class="col">
@@ -92,37 +79,21 @@
                       <div class="row mb-3">
                         <div class="col-md-6">
                           <label class="form-label">Họ và Tên</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="profile.ho_va_ten"
-                          />
+                          <input type="text" class="form-control" />
                         </div>
                         <div class="col-md-6">
                           <label class="form-label">Email</label>
-                          <input
-                            type="email"
-                            class="form-control"
-                            v-model="profile.email"
-                          />
+                          <input type="email" class="form-control" />
                         </div>
                       </div>
                       <div class="row mb-3">
                         <div class="col-md-6">
                           <label class="form-label">Số Điện Thoại</label>
-                          <input
-                            type="tel"
-                            class="form-control"
-                            v-model="profile.so_dien_thoai"
-                          />
+                          <input type="tel" class="form-control" />
                         </div>
                         <div class="col-md-6">
                           <label class="form-label">Ngày Sinh</label>
-                          <input
-                            type="date"
-                            class="form-control"
-                            v-model="profile.ngay_sinh"
-                          />
+                          <input type="date" class="form-control" />
                         </div>
                       </div>
                       <button type="submit" class="btn btn-primary">
@@ -277,22 +248,29 @@ import axios from "axios";
 import { createToaster } from "@meforma/vue-toaster";
 import baseRequest from "../../../core/baseRequest";
 const toaster = createToaster({ position: "top-right" });
-a;
 
 export default {
   data() {
-    profile: {
-    }
+    return {
+      id: this.$route.params.id,
+      profile: {},
+      token: localStorage.getItem("chia_khoa"),
+    };
   },
   mounted() {
-    this.loadDataProfile();
+    this.loadProfile();
   },
   methods: {
-    loadDataProfile() {
-      baseRequest.get("khach-hang/thong-tin").then((res) => {
-        this.profile = res.data.data;
-      });
-    },
+    loadProfile() {
+      baseRequest
+        .get(`khach-hang/thong-tin/${this.id}`)
+        .then((response) => {
+          this.profile = response.data.data;
+        })
+        .catch((error) => {
+          console.error("Error loading profile:", error);
+        });
+    }
   },
 };
 </script>

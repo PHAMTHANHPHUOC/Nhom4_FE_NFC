@@ -81,18 +81,16 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <router-link to="/nhan-vien/ho-so">
-                <a class="dropdown-item" href="javascript:;">
-                  <i class="bx bx-user"></i>
-                  <span>Thông tin cá nhân</span>
-                </a>
+              <router-link :to="`/nhan-vien/ho-so/${id}`" class="dropdown-item">
+                <i class="bx bx-user"></i>
+                <span>Thông tin cá nhân</span>
               </router-link>
             </li>
             <li>
               <div class="dropdown-divider mb-0"></div>
             </li>
             <li>
-              <a class="dropdown-item" href="javascript:;">
+              <a v-on:click="dangXuat()" class="dropdown-item" href="javascript:;">
                 <i class="bx bx-log-out"></i>
                 <span>Đăng xuất</span>
               </a>
@@ -106,21 +104,34 @@
 
 <script>
 import { createToaster } from "@meforma/vue-toaster";
+import baseRequest from "../../core/baseRequest";
 
 const toaster = createToaster({ position: "top-right" });
 
 export default {
-  // data() { },
-  // mounted() {
-  //   // this.loadDataKhachHang();
-  // },
-  // methods: {
-  //   loadDataProfile() {
-  //     baseRequestUser.get("khach-hang/thong-tin").then((res) => {
-  //       this.profile = res.data.data;
-  //     });
-  //   },
-  // },
+  data() {
+    return {
+      id: JSON.parse(localStorage.getItem("data"))?.id || null,
+      profile: {
+      },
+    }
+  },
+  mounted() {
+
+  },
+  methods: {
+    dangXuat() {
+      baseRequest.get("dang-xuat").then((res) => {
+        if (res.status == 200) {
+          localStorage.removeItem("chia_khoa");
+          localStorage.removeItem("data");
+          toaster.success(res.data.message);
+          this.$router.push("/quan-ly/dang-nhap");
+        }
+      })
+    }
+
+  },
 };
 </script>
 
