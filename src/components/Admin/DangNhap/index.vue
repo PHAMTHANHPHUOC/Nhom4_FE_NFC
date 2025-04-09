@@ -8,55 +8,28 @@
         <form @submit.prevent="handleLogin">
           <div class="mb-4">
             <label class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              v-model="khach_hang.email"
-              placeholder="Nhập email của bạn"
-              required
-            />
+            <input type="email" class="form-control" v-model="khach_hang.email" placeholder="Nhập email của bạn"
+              required />
           </div>
 
           <div class="mb-4">
             <label class="form-label">Mật Khẩu</label>
             <div class="input-group">
-              <input
-                :type="showPassword ? 'text' : 'password'"
-                class="form-control"
-                v-model="khach_hang.password"
-                placeholder="Nhập mật khẩu"
-                required
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                @click="togglePassword"
-              >
-                <i
-                  :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
-                ></i>
+              <input :type="showPassword ? 'text' : 'password'" class="form-control" v-model="khach_hang.password"
+                placeholder="Nhập mật khẩu" required />
+              <button class="btn btn-outline-secondary" type="button" @click="togglePassword">
+                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
               </button>
             </div>
           </div>
 
           <div class="mb-4 form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="remember"
-              v-model="rememberMe"
-            />
-            <label class="form-check-label" for="remember"
-              >Ghi nhớ đăng nhập</label
-            >
+            <input type="checkbox" class="form-check-input" id="remember" v-model="rememberMe" />
+            <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
           </div>
 
           <div class="d-grid">
-            <button
-              v-on:click="actionDangNhap()"
-              type="submit"
-              class="btn btn-primary"
-            >
+            <button v-on:click="actionDangNhap()" type="submit" class="btn btn-primary">
               <i class="fas fa-sign-in-alt me-2"></i>
               Đăng Nhập
             </button>
@@ -84,21 +57,15 @@ export default {
       khach_hang: {},
     };
   },
-  mounted() {},
+  mounted() { },
   methods: {
     actionDangNhap() {
       baseRequest.post("dang-nhap", this.khach_hang).then((res) => {
-        if (res.data.status == 1) {
-          console.log(res.data.chia_khoa);
-          toaster.success(res.data.message);
-          localStorage.setItem("chia_khoa", res.data.chia_khoa);
-          this.khach_hang = {};
-          this.$router.push("/");
-        } else if (res.data.status == 2) {
-          toaster.warning(res.data.message);
-        } else {
-          toaster.error(res.data.message);
-        }
+        console.log(res.data.chia_khoa);
+        toaster.success(res.data.message);
+        localStorage.setItem("chia_khoa", res.data.chia_khoa);
+        this.khach_hang = {};
+        this.$router.push("/");
       });
     },
   },
