@@ -13,7 +13,7 @@ export default function (to, from, next) {
       }
     )
     .then((res) => {
-      if (res.data.status) {
+      if (res.data.status == 200) {
         next(); // Được phép đi qua
       } else {
         next("/quan-ly/dang-nhap");
