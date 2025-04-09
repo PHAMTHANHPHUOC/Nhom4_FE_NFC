@@ -2,7 +2,7 @@
   <div class="quan-ly-chuc-danh">
     <div class="card shadow">
       <div class="card-header bg-gradient-primary text-white">
-        <h4 class="card-title mb-0"><i class="fas fa-id-badge me-2"></i>Quản lý chức danh</h4>
+        <h4 class="card-title mb-0 text-white"><i class="fas fa-id-badge me-2"></i>Quản lý chức danh</h4>
         <div class="card-tools">
           <button class="btn btn-light btn-hover-shine" data-bs-toggle="modal" data-bs-target="#createModal">
             <i class="fas fa-plus-circle me-1"></i> Thêm chức danh
@@ -211,7 +211,7 @@
               <i class="fas fa-exclamation-triangle text-warning fa-3x"></i>
             </div>
             <p class="text-center">Bạn có chắc chắn muốn xóa chức danh <strong>{{ deleteBangChucDanh.ten_chuc_danh
-                }}</strong>?</p>
+            }}</strong>?</p>
             <p class="text-danger text-center small">Lưu ý: Hành động này không thể hoàn tác.</p>
           </div>
           <div class="modal-footer">
