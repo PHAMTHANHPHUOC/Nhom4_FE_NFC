@@ -4,6 +4,7 @@ import router from "./router";
 import Auth from "./layout/wrapper/AuthMaster.vue";
 import Client from "./layout/wrapper/ClientMaster.vue";
 import Toaster from "@meforma/vue-toaster";
+
 const app = createApp(App);
 
 app.use(router, Toaster);

@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-container">
+  <div class="row">
     <div class="card">
       <div class="card-body">
         <ul class="nav nav-tabs nav-primary" role="tablist">
@@ -7,350 +7,431 @@
             <a
               class="nav-link active"
               data-bs-toggle="tab"
-              href="#profile"
+              href="#primaryhome"
               role="tab"
+              aria-selected="true"
             >
-              <i class="fas fa-user me-2"></i>Thông Tin Cá Nhân
+              <div class="d-flex align-items-center">
+                <div class="tab-icon">
+                  <i class="fa-solid fa-user font-18 me-1"></i>
+                </div>
+                <div class="tab-title">Profile</div>
+              </div>
             </a>
           </li>
+
           <li class="nav-item" role="presentation">
             <a
               class="nav-link"
               data-bs-toggle="tab"
-              href="#security"
+              href="#primarycontact"
               role="tab"
+              aria-selected="false"
+              tabindex="-1"
             >
-              <i class="fas fa-shield-alt me-2"></i>Bảo Mật
-            </a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" data-bs-toggle="tab" href="#reports" role="tab">
-              <i class="fas fa-chart-bar me-2"></i>Báo Cáo
+              <div class="d-flex align-items-center">
+                <div class="tab-icon">
+                  <i class="fa-solid fa-lock font-18 me-1"></i>
+                </div>
+                <div class="tab-title">Đổi mật khẩu</div>
+              </div>
             </a>
           </li>
         </ul>
-
-        <div class="tab-content py-4">
-          <!-- Profile Tab -->
-          <div class="tab-pane fade show active" id="profile" role="tabpanel">
+        <div class="tab-content py-3">
+          <div
+            class="tab-pane fade show active"
+            id="primaryhome"
+            role="tabpanel"
+          >
             <div class="row">
               <div class="col-lg-4">
-                <div class="card profile-card">
-                  <div class="card-body text-center">
-                    <div class="position-relative d-inline-block">
+                <div class="card">
+                  <div class="card-body">
+                    <div
+                      class="d-flex flex-column align-items-center text-center"
+                    >
                       <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnO0uhwiK1yDASJ6SkO3SLFNU3dtIb4NMiBA&s"
-                        alt="Quản trị viên"
+                        src="https://xahara.vn/wp-content/uploads/ch%C3%B3-husky-ng%C3%A1o.jpg"
+                        alt=""
                         class="rounded-circle p-1 bg-primary"
                         width="110"
                       />
-                      <button class="btn btn-sm btn-primary avatar-edit-btn">
-                        <i class="fas fa-camera"></i>
-                      </button>
-                    </div>
-                    <h4 class="mt-3">{{ profile.ho_va_ten }}</h4>
-                    <p class="text-muted">{{ profile.ma_chuc_danh }}</p>
-                    <div class="profile-stats">
-                      <div class="row text-center">
-                        <div class="col">
-                          <h6>Ngày Công</h6>
-                          <p>22/26</p>
-                        </div>
-                        <div class="col">
-                          <h6>Dự Án</h6>
-                          <p>5</p>
-                        </div>
-                        <div class="col">
-                          <h6>KPI</h6>
-                          <p>90%</p>
-                        </div>
+                      <div class="mt-3">
+                        <h4>{{ profile.ho_va_ten }}</h4>
+                        <p class="text-secondary mb-1">{{ profile.email }}</p>
                       </div>
                     </div>
-                    <hr />
-                    <div class="social-links">
-                      <a href="#" class="btn btn-outline-primary btn-sm">
-                        <i class="fab fa-facebook-f"></i>
-                      </a>
-                      <a href="#" class="btn btn-outline-info btn-sm">
-                        <i class="fab fa-twitter"></i>
-                      </a>
-                      <a href="#" class="btn btn-outline-danger btn-sm">
-                        <i class="fab fa-instagram"></i>
-                      </a>
-                      <a href="#" class="btn btn-outline-dark btn-sm">
-                        <i class="fab fa-github"></i>
-                      </a>
-                    </div>
+                    <hr class="my-4" />
+                    <ul class="list-group list-group-flush">
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                      >
+                        <h6 class="mb-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-instagram me-2 icon-inline text-danger"
+                          >
+                            <rect
+                              x="2"
+                              y="2"
+                              width="20"
+                              height="20"
+                              rx="5"
+                              ry="5"
+                            ></rect>
+                            <path
+                              d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                            ></path>
+                            <line
+                              x1="17.5"
+                              y1="6.5"
+                              x2="17.51"
+                              y2="6.5"
+                            ></line></svg
+                          >Instagram
+                        </h6>
+                        <span class="text-secondary">DZFullStack</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center flex-wrap"
+                      >
+                        <h6 class="mb-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-facebook me-2 icon-inline text-primary"
+                          >
+                            <path
+                              d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                            ></path></svg
+                          >Facebook
+                        </h6>
+                        <span class="text-secondary">DZFullStack</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
               <div class="col-lg-8">
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title mb-4">Thông Tin Cá Nhân</h5>
-                    <form @submit.prevent="updateProfile">
-                      <div class="row mb-3">
-                        <div class="col-md-6">
-                          <label class="form-label">Họ và Tên</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            v-model="profile.ho_va_ten"
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="form-label">Email</label>
-                          <input
-                            type="email"
-                            class="form-control"
-                            v-model="profile.email"
-                          />
-                        </div>
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Họ và tên</h6>
                       </div>
-                      <div class="row mb-3">
-                        <div class="col-md-6">
-                          <label class="form-label">Số Điện Thoại</label>
-                          <input
-                            type="tel"
-                            class="form-control"
-                            v-model="profile.so_dien_thoai"
-                          />
-                        </div>
-                        <div class="col-md-6">
-                          <label class="form-label">Ngày Sinh</label>
-                          <input
-                            type="date"
-                            class="form-control"
-                            v-model="profile.ngay_sinh"
-                          />
-                        </div>
+                      <div class="col-sm-9 text-secondary">
+                        <input
+                          v-model="profile.ho_va_ten"
+                          type="text"
+                          class="form-control"
+                          placeholder="Nhập họ và tên"
+                        />
                       </div>
-                      <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>Lưu Thay Đổi
-                      </button>
-                    </form>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Email</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <input
+                          v-model="profile.email"
+                          type="email"
+                          class="form-control"
+                          placeholder="Nhập email"
+                          readonly
+                        />
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Số điện thoại</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <input
+                          v-model="profile.so_dien_thoai"
+                          type="text"
+                          class="form-control"
+                          placeholder="Nhập số điện thoại"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Ngày sinh</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <input
+                          v-model="profile.ngay_sinh"
+                          type="date"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Giới tính</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <select v-model="profile.gioi_tinh" class="form-select">
+                          <option :value="1">Nam</option>
+                          <option :value="0">Nữ</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Ngày tuyển dụng</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <input
+                          v-model="profile.ngay_tuyen_dung"
+                          type="date"
+                          class="form-control"
+                          readonly
+                        />
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Phòng ban</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <select
+                          v-model="profile.id_phong_ban"
+                          class="form-select"
+                        >
+                          <option value="">Chọn phòng ban</option>
+                          <option
+                            v-for="pb in phongBanList"
+                            :key="pb.id"
+                            :value="pb.id"
+                          >
+                            {{ pb.ten_phong_ban }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Chức danh</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <select
+                          v-model="profile.id_chuc_danh"
+                          class="form-select"
+                        >
+                          <option value="">Chọn chức danh</option>
+                          <option
+                            v-for="cd in chucDanhList"
+                            :key="cd.id"
+                            :value="cd.id"
+                          >
+                            {{ cd.ten_chuc_danh }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Loại hợp đồng</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <input
+                          v-model="profile.loai_hop_dong"
+                          type="text"
+                          class="form-control"
+                          readonly
+                        />
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <div class="col-sm-3">
+                        <h6 class="mb-0">Trạng thái</h6>
+                      </div>
+                      <div class="col-sm-9 text-secondary">
+                        <select
+                          v-model="profile.trang_thai"
+                          class="form-select"
+                          disabled
+                        >
+                          <option :value="1">Đang làm việc</option>
+                          <option :value="0">Đã nghỉ việc</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-3"></div>
+                      <div class="col-sm-9 text-secondary">
+                        <button
+                          class="btn btn-primary px-4"
+                          v-on:click="updateProfile()"
+                        >
+                          <i class="fas fa-save me-2"></i>Lưu thay đổi
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Security Tab -->
-          <!-- <div class="tab-pane fade" id="security" role="tabpanel">
-            <div class="row justify-content-center">
-              <div class="col-md-8">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title mb-4">Đổi Mật Khẩu</h5>
-                    <form @submit.prevent="changePassword">
-                      <div class="mb-3">
-                        <label class="form-label">Mật Khẩu Hiện Tại</label>
-                        <div class="input-group">
-                          <input
-                            :type="showPassword ? 'text' : 'password'"
-                            class="form-control"
-                            v-model="passwordForm.current"
-                          />
-                          <button
-                            type="button"
-                            class="btn btn-outline-secondary"
-                            @click="showPassword = !showPassword"
-                          >
-                            <i
-                              :class="
-                                showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'
-                              "
-                            ></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Mật Khẩu Mới</label>
-                        <input
-                          type="password"
-                          class="form-control"
-                          v-model="passwordForm.new"
-                        />
-                      </div>
-                      <div class="mb-4">
-                        <label class="form-label">Xác Nhận Mật Khẩu Mới</label>
-                        <input
-                          type="password"
-                          class="form-control"
-                          v-model="passwordForm.confirm"
-                        />
-                      </div>
-                      <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-key me-2"></i>Đổi Mật Khẩu
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-link"
-                        @click="forgotPassword"
-                      >
-                        Quên mật khẩu?
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
+          <div class="tab-pane fade" id="primarycontact" role="tabpanel">
+            <div class="col">
+              <h4>Thay đổi mật khẩu</h4>
             </div>
-          </div> -->
-
-          <!-- Reports Tab -->
-          <!-- <div class="tab-pane fade" id="reports" role="tabpanel">
-            <div class="row">
-              <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card bg-primary text-white">
-                  <div class="card-body">
-                    <h6>Tổng Ngày Công</h6>
-                    <h3>22/26</h3>
-                    <div class="progress mt-2" style="height: 5px">
-                      <div
-                        class="progress-bar bg-white"
-                        style="width: 85%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
+            <div class="col">Quản lý mật khẩu để bảo mật tài khoản</div>
+            <hr />
+            <div class="row mb-2">
+              <div class="col-2">
+                <label for="">Mật khẩu cũ</label>
               </div>
-              <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card bg-success text-white">
-                  <div class="card-body">
-                    <h6>KPI Đạt Được</h6>
-                    <h3>90%</h3>
-                    <div class="progress mt-2" style="height: 5px">
-                      <div
-                        class="progress-bar bg-white"
-                        style="width: 90%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card bg-warning text-white">
-                  <div class="card-body">
-                    <h6>Dự Án Tham Gia</h6>
-                    <h3>5</h3>
-                    <div class="progress mt-2" style="height: 5px">
-                      <div
-                        class="progress-bar bg-white"
-                        style="width: 75%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-3 mb-4">
-                <div class="card bg-info text-white">
-                  <div class="card-body">
-                    <h6>Đánh Giá</h6>
-                    <h3>A+</h3>
-                    <div class="progress mt-2" style="height: 5px">
-                      <div
-                        class="progress-bar bg-white"
-                        style="width: 95%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
+              <div class="col-3">
+                <input
+                  v-model="update_password.old_password"
+                  type="text"
+                  placeholder="Nhập mật khẩu cũ"
+                  class="form-control"
+                />
               </div>
             </div>
 
-           
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">Biểu Đồ Hiệu Suất</h5>
-                <canvas id="performanceChart" height="100"></canvas>
+            <div class="row mb-2">
+              <div class="col-2">
+                <label for="">Mật khẩu mới</label>
+              </div>
+              <div class="col-3">
+                <input
+                  v-model="update_password.password"
+                  type="password"
+                  placeholder="Nhập mật khẩu mới"
+                  class="form-control"
+                />
               </div>
             </div>
-          </div> -->
+            <div class="row mb-2">
+              <div class="col-2">
+                <label for="">Nhập lại Mật khẩu mới </label>
+              </div>
+              <div class="col-3">
+                <input
+                  v-model="update_password.re_password"
+                  type="password"
+                  placeholder="Nhập lại mật khẩu mới"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <button class="btn btn-primary" v-on:click="updateMatKhau()">
+              Lưu
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-import axios from "axios";
 import { createToaster } from "@meforma/vue-toaster";
 import baseRequest from "../../../core/baseRequest";
 const toaster = createToaster({ position: "top-right" });
-a;
-
+baseRequest;
 export default {
   data() {
-    profile: {
-    }
+    return {
+      profile: {},
+      update_password: {},
+      dia_chi_create: {},
+      dia_chi_update: {},
+      dia_chi_delete: {},
+      list_dia_chi: [],
+      phongBanList: [],
+      chucDanhList: [],
+    };
   },
   mounted() {
-    this.loadDataProfile();
+    this.getProfile();
+    this.loadPhongBan();
+    this.loadChucDanh();
   },
   methods: {
-    loadDataProfile() {
+    getProfile() {
       baseRequest.get("khach-hang/thong-tin").then((res) => {
         this.profile = res.data.data;
       });
     },
+
+    updateProfile() {
+      baseRequest
+        .post("khach-hang/update-thong-tin", this.profile)
+        .then((res) => {
+          if (res.data.status) {
+            toaster.success(res.data.message);
+            this.getProfile();
+          } else {
+            toaster.error(res.data.message);
+          }
+        });
+    },
+
+    updateMatKhau() {
+      baseRequest
+        .post("khach-hang/update-mat-khau", this.update_password)
+        .then((res) => {
+          if (res.data.status) {
+            toaster.success(res.data.message);
+            this.getProfile();
+            this.update_password = {};
+          } else {
+            toaster.error(res.data.message);
+          }
+        });
+    },
+
+    async loadPhongBan() {
+      try {
+        const response = await baseRequest.get("phong-ban/data");
+        this.phongBanList = response.data.data;
+      } catch (error) {
+        console.error("Lỗi khi tải phòng ban:", error);
+      }
+    },
+
+    async loadChucDanh() {
+      try {
+        const response = await baseRequest.get("chuc-danh/data");
+        this.chucDanhList = response.data.data;
+      } catch (error) {
+        console.error("Lỗi khi tải chức danh:", error);
+      }
+    },
   },
 };
 </script>
-
-<style scoped>
-.profile-avatar {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border: 4px solid #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.avatar-edit-btn {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  border-radius: 50%;
-  padding: 8px;
-}
-
-.profile-card {
-  border: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.profile-stats {
-  padding: 20px 0;
-}
-
-.nav-tabs .nav-link {
-  color: #6c757d;
-  font-weight: 500;
-}
-
-.nav-tabs .nav-link.active {
-  color: #0d6efd;
-  font-weight: 600;
-}
-
-.card {
-  border: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-}
-
-.progress {
-  border-radius: 10px;
-}
-
-.btn-outline-secondary:hover {
-  background-color: #f8f9fa;
-  color: #6c757d;
-}
-</style>
+<style></style>

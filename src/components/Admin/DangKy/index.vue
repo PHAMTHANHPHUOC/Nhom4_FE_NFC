@@ -10,7 +10,6 @@
             class="form-control"
             id="ho_va_ten"
             v-model="formData.ho_va_ten"
-            required
           />
         </div>
         <div class="col-md-6 mb-3">
@@ -20,7 +19,6 @@
             class="form-control"
             id="ngay_sinh"
             v-model="formData.ngay_sinh"
-            required
           />
         </div>
       </div>
@@ -60,7 +58,6 @@
             class="form-control"
             id="so_dien_thoai"
             v-model="formData.so_dien_thoai"
-            required
           />
         </div>
       </div>
@@ -73,7 +70,6 @@
             class="form-control"
             id="email"
             v-model="formData.email"
-            required
           />
         </div>
         <div class="col-md-6 mb-3">
@@ -83,7 +79,6 @@
             class="form-control"
             id="password"
             v-model="formData.password"
-            required
           />
         </div>
       </div>
@@ -98,7 +93,6 @@
             class="form-control"
             id="ngay_tuyen_dung"
             v-model="formData.ngay_tuyen_dung"
-            required
           />
         </div>
         <div class="col-md-6 mb-3">
@@ -106,8 +100,7 @@
           <select
             class="form-select"
             id="ma_vai_tro"
-            v-model="formData.ma_vai_tro"
-            required
+            v-model="formData.id_vai_tro"
           >
             <option value="" disabled>Chọn vai trò</option>
             <option v-for="role in roles" :key="role.id" :value="role.id">
@@ -123,8 +116,7 @@
           <select
             class="form-select"
             id="ma_phong_ban"
-            v-model="formData.ma_phong_ban"
-            required
+            v-model="formData.id_phong_ban"
           >
             <option value="" disabled>Chọn phòng ban</option>
             <option v-for="dept in departments" :key="dept.id" :value="dept.id">
@@ -137,8 +129,7 @@
           <select
             class="form-select"
             id="ma_chuc_danh"
-            v-model="formData.ma_chuc_danh"
-            required
+            v-model="formData.id_chuc_danh"
           >
             <option value="" disabled>Chọn chức danh</option>
             <option
@@ -159,7 +150,6 @@
             class="form-select"
             id="loai_hop_dong"
             v-model="formData.loai_hop_dong"
-            required
           >
             <option value="" disabled>Chọn loại hợp đồng</option>
             <option value="Toàn thời gian">Toàn thời gian</option>
