@@ -16,6 +16,7 @@
               required
             />
           </div>
+
           <div class="mb-4">
             <label class="form-label">Mật Khẩu</label>
             <div class="input-group">
@@ -37,6 +38,7 @@
               </button>
             </div>
           </div>
+
           <div class="mb-4 form-check">
             <input
               type="checkbox"
@@ -48,6 +50,7 @@
               >Ghi nhớ đăng nhập</label
             >
           </div>
+
           <div class="d-grid">
             <button
               v-on:click="actionDangNhap()"
@@ -71,6 +74,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import baseRequest from "../../../core/baseRequest";
 import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ position: "top-right" });
@@ -78,25 +82,20 @@ export default {
   data() {
     return {
       khach_hang: {},
-      showPassword: false,
-      rememberMe: false,
     };
   },
   mounted() {},
   methods: {
-    togglePassword() {
-      this.showPassword = !this.showPassword;
-    },
-    handleLogin() {
-      this.actionDangNhap();
-    },
     actionDangNhap() {
       baseRequest.post("dang-nhap", this.khach_hang).then((res) => {
-        if (res.data.status == 200) {
-          // Store the token from the correct location in the response
-          localStorage.setItem("chia_khoa", res.data.data.chia_khoa);
+        if (res.status == 200) {
+          console.log(res.data.data.chia_khoa);
           toaster.success(res.data.message);
+          localStorage.setItem("chia_khoa", res.data.data.chia_khoa);
+          localStorage.setItem("data", JSON.stringify(res.data.data.data));
           this.$router.push("/");
+        } else {
+          toaster.error(res.data.message);
         }
       });
     },
