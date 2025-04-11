@@ -12,10 +12,12 @@
     "@meforma/vue-toaster": "^1.3.0",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
+    "chart.js": "^3.9.1",
     "jquery": "^3.7.1",
     "simplebar": "^6.3.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.13",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",

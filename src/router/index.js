@@ -7,20 +7,27 @@ const routes = [
     meta: { layout: "client" },
   },
   {
-    path: "/nhan-vien/bao-cao-vang",
-    component: () => import("../components/NhanVien/BaoCaoVang/index.vue"),
-    meta: { layout: "client" },
-  },
-  {
     path: "/nhan-vien/bao-hiem-phuc-loi",
     component: () =>
       import("../components/NhanVien/BaoHiemVaPhucLoi/index.vue"),
     meta: { layout: "client" },
   },
   {
-    path: "/nhan-vien/tieu-chi-kpi",
+    path: "/nhan-vien/tieu-chi-kpi", 
     component: () =>
       import("../components/NhanVien/TieuChiKPI/index.vue"),
+    meta: { layout: "client" },
+  },
+  {
+    path: "/nhan-vien/quan-ly-ho-so-nhan-su",
+    component: () =>
+      import("../components/NhanVien/QuanLyHoSoNhanSu/index.vue"),
+    meta: { layout: "client" },
+  },
+  {
+    path: "/nhan-vien/quan-ly-hop-dong",
+    component: () =>
+      import("../components/NhanVien/QuanLyHopDong/index.vue"),
     meta: { layout: "client" },
   },
 ];

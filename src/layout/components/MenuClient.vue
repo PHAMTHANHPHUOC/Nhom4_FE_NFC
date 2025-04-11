@@ -13,21 +13,11 @@
       <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
         <li class="nav-item">
           <router-link to="/">
-            <a class="nav-link" href="/">
+            <a class="nav-link" href="/"> 
               <div class="parent-icon">
                 <i class="fa-brands fa-product-hunt"></i>
               </div>
               <div class="menu-title">Home</div>
-            </a>
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/nhan-vien/bao-cao-vang">
-            <a class="nav-link" href="/nhan-vien/bao-cao-vang"> 
-              <div class="parent-icon">
-                <i class="fa-brands fa-product-hunt"></i>
-              </div>
-              <div class="menu-title">Báo Cáo Vắng</div>
             </a>
           </router-link>
         </li>
@@ -48,6 +38,26 @@
                 <i class="fa-brands fa-product-hunt"></i>
               </div>
               <div class="menu-title">Tiêu Chí KPI</div>
+            </a>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/nhan-vien/quan-ly-ho-so-nhan-su">
+            <a class="nav-link" href="/nhan-vien/quan-ly-ho-so-nhan-su">
+              <div class="parent-icon">
+                <i class="fa-brands fa-product-hunt"></i>
+              </div>
+              <div class="menu-title">Quản Lý Hồ Sơ Nhân Sự</div>
+            </a>
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/nhan-vien/quan-ly-hop-dong">
+            <a class="nav-link" href="/nhan-vien/quan-ly-hop-dong">
+              <div class="parent-icon">
+                <i class="fa-solid fa-file-contract"></i>
+              </div>
+              <div class="menu-title">Quản Lý Hợp Đồng</div>
             </a>
           </router-link>
         </li>
