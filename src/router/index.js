@@ -27,6 +27,16 @@ const routes = [
     component: () => import("../components/Admin/NhanVien/index.vue"),
     beforeEnter: checkLogin,
   },
+  {
+    path: "/admin/tieu-chi-kpi",
+    component: () => import("../components/Admin/TieuChiKpi/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/kpi-nhan-vien",
+    component: () => import("../components/Admin/KPINhanVien/index.vue"),
+    beforeEnter: checkLogin,
+  },
 ];
 
 const router = createRouter({
