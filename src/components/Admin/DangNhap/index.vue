@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import baseRequest from "../../../core/baseRequest";
 import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ position: "top-right" });
@@ -87,14 +88,12 @@ export default {
   methods: {
     actionDangNhap() {
       baseRequest.post("dang-nhap", this.khach_hang).then((res) => {
-        if (res.data.status == 1) {
-          console.log(res.data.chia_khoa);
+        if (res.status == 200) {
+          console.log(res.data.data.chia_khoa);
           toaster.success(res.data.message);
-          localStorage.setItem("chia_khoa", res.data.chia_khoa);
-          this.khach_hang = {};
+          localStorage.setItem("chia_khoa", res.data.data.chia_khoa);
+          localStorage.setItem("data", JSON.stringify(res.data.data.data));
           this.$router.push("/");
-        } else if (res.data.status == 2) {
-          toaster.warning(res.data.message);
         } else {
           toaster.error(res.data.message);
         }

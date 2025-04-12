@@ -75,16 +75,7 @@
             </a>
           </router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/nhan-vien/ho-so">
-            <a class="nav-link" href="/nhan-vien/ho-so">
-              <div class="parent-icon">
-                <i class="fa-brands fa-product-hunt"></i>
-              </div>
-              <div class="menu-title">Hồ Sơ Nhân Viên</div>
-            </a>
-          </router-link>
-        </li>
+
         <li class="nav-item">
           <router-link to="/nhan-vien/lich-lam-viec">
             <a class="nav-link" href="/nhan-vien/lich-lam-viec">

@@ -49,7 +49,7 @@ const routes = [
     meta: { layout: "client" },
   },
   {
-    path: "/nhan-vien/ho-so",
+    path: "/nhan-vien/ho-so/:id",
     component: () => import("../components/Admin/Profile/index.vue"),
     meta: { layout: "client" },
     beforeEnter: kiemTranNhanVien,
