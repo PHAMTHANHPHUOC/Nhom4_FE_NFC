@@ -1,183 +1,94 @@
 <template>
-  <div class="login-container">
-    <div class="card">
-      <div class="card-header text-center">
-        <h3>Đăng Nhập</h3>
-      </div>
-      <div class="card-body">
-        <form @submit.prevent="handleLogin">
-          <div class="mb-4">
-            <label class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              v-model="khach_hang.email"
-              placeholder="Nhập email của bạn"
-              required
-            />
-          </div>
-
-          <div class="mb-4">
-            <label class="form-label">Mật Khẩu</label>
-            <div class="input-group">
-              <input
-                :type="showPassword ? 'text' : 'password'"
-                class="form-control"
-                v-model="khach_hang.password"
-                placeholder="Nhập mật khẩu"
-                required
-              />
-              <button
-                class="btn btn-outline-secondary"
-                type="button"
-                @click="togglePassword"
-              >
-                <i
-                  :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
-                ></i>
-              </button>
+    <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2">
+                <div class="col mx-auto">
+                    <div class="my-4 text-center">
+                        <img src="https://dzfullstack.com/assets/images/logo-img.png" width="180" alt="" />
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="border p-4 rounded">
+                                <div class="text-center">
+                                    <h3 class="">ĐĂNG NHẬP NHÂN VIÊN</h3>
+                                </div>
+                                <div class="login-separater text-center mb-4">
+                                    <hr />
+                                </div>
+                                <div class="form-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label">Email</label>
+                                            <div class="input-group">
+                                                <div class="input-group-text bg-transparent">
+                                                    <i class="fa-solid fa-envelope"></i>
+                                                </div>
+                                                <input v-model="tk.email" type="email"
+                                                    class="form-control border-end-0">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Password</label>
+                                            <div class="input-group">
+                                                <div class="input-group-text bg-transparent"><i
+                                                        class="fa-solid fa-lock"></i></div>
+                                                <input v-model="tk.password" type="password"
+                                                    class="form-control border-end-0">
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-12">
+                                            <label class="form-label">Recaptcha</label>
+                                            <div class="g-recaptcha"
+                                                data-sitekey="6LfILHgqAAAAALvN9yYSUf56SxVvGtMsuhwTYRr7" ref="recaptcha">
+                                            </div>
+                                        </div> -->
+                                        <div class="d-grid">
+                                            <button v-on:click="login()" type="button" class="btn btn-primary"><i
+                                                    class="fa-solid fa-lock-open"></i>Đăng
+                                                Nhập</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="mb-4 form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="remember"
-              v-model="rememberMe"
-            />
-            <label class="form-check-label" for="remember"
-              >Ghi nhớ đăng nhập</label
-            >
-          </div>
-
-          <div class="d-grid">
-            <button
-              v-on:click="actionDangNhap()"
-              type="submit"
-              class="btn btn-primary"
-            >
-              <i class="fas fa-sign-in-alt me-2"></i>
-              Đăng Nhập
-            </button>
-          </div>
-
-          <div class="text-center mt-4">
-            <p class="mb-0">
-              <a href="#" class="text-decoration-none">Quên mật khẩu?</a>
-            </p>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import axios from "axios";
-import baseRequest from "../../../core/baseRequest";
-import { createToaster } from "@meforma/vue-toaster";
-const toaster = createToaster({ position: "top-right" });
+import axios from 'axios';
 export default {
-  data() {
-    return {
-      khach_hang: {},
-    };
-  },
-  mounted() {},
-  methods: {
-    actionDangNhap() {
-      baseRequest.post("dang-nhap", this.khach_hang).then((res) => {
-        if (res.status == 200) {
-          console.log(res.data.data.chia_khoa);
-          toaster.success(res.data.message);
-          localStorage.setItem("chia_khoa", res.data.data.chia_khoa);
-          localStorage.setItem("data", JSON.stringify(res.data.data.data));
-          this.$router.push("/");
-        } else {
-          toaster.error(res.data.message);
+    data() {
+        return {
+            tk: { 'email': '', 'password': '' },
         }
-      });
     },
-  },
-};
+    methods: {
+        login() {
+            // const code = grecaptcha.getResponse();
+            // if (!code) {
+            //     this.$toast.error("Bạn chưa chọn mã captcha!");
+            // } else {
+            //     this.tk.ma_captcha = code;
+
+            axios
+                .post("http://127.0.0.1:8000/api/admin/dang-nhap", this.tk)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        localStorage.setItem('tk_nhan_vien', res.data.token);
+                        this.$router.push('/admin/nhan-vien');
+                    } else {
+                        this.$toast.error(res.data.message);
+                    }
+                });
+            // }
+        }
+    }
+}
 </script>
 
-<style scoped>
-.login-container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f8f9fa;
-  padding: 1rem;
-}
-
-.card {
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  border: none;
-  border-radius: 10px;
-}
-
-.card-header {
-  background: #fff;
-  border-bottom: 2px solid #f0f0f0;
-  padding: 1.5rem;
-  border-radius: 10px 10px 0 0;
-}
-
-.card-header h3 {
-  margin: 0;
-  color: #2c3e50;
-  font-weight: 600;
-}
-
-.card-body {
-  padding: 2rem;
-}
-
-.form-label {
-  font-weight: 500;
-  color: #2c3e50;
-}
-
-.form-control {
-  padding: 0.75rem 1rem;
-  border-radius: 5px;
-}
-
-.form-control:focus {
-  box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
-}
-
-.btn {
-  padding: 0.75rem 1rem;
-  font-weight: 500;
-}
-
-.btn-primary {
-  background-color: #3498db;
-  border-color: #3498db;
-}
-
-.btn-primary:hover {
-  background-color: #2980b9;
-  border-color: #2980b9;
-}
-
-a {
-  color: #3498db;
-}
-
-a:hover {
-  color: #2980b9;
-}
-
-@media (max-width: 576px) {
-  .card-body {
-    padding: 1.5rem;
-  }
-}
-</style>
+<style></style>

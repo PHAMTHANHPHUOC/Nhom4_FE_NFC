@@ -1,14 +1,14 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import Auth from "./layout/wrapper/AuthMaster.vue";
-import Client from "./layout/wrapper/ClientMaster.vue";
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+import Default from './layout/wrapper/index.vue'
+import Blank from './layout/wrapper/index_blank.vue'
 import Toaster from "@meforma/vue-toaster";
-
-const app = createApp(App);
-
-app.use(router, Toaster);
-app.component("client-layout", Client);
-app.component("auth-layout", Auth);
-
-app.mount("#app");
+const app = createApp(App)
+app.use(router)
+app.use(Toaster, {
+    position: "top-right",
+});
+app.component("default-layout", Default);
+app.component("blank-layout", Blank);
+app.mount("#app")
