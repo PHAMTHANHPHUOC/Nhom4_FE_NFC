@@ -47,6 +47,16 @@ const routes = [
     component: () => import("../components/Admin/ThuongVaPhat/index.vue"),
     beforeEnter: checkLogin,
   },
+  {
+    path: "/admin/chi-tiet-hop-dong",
+    component: () => import("../components/Admin/ChiTietHopDong/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/loai-hop-dong",
+    component: () => import("../components/Admin/LoaiHopDong/index.vue"),
+    beforeEnter: checkLogin,
+  },
 ];
 
 const router = createRouter({
