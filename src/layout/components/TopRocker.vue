@@ -222,259 +222,43 @@ export default {
 };
 </script>
 <style>
-/* Main topbar styling */
-.topbar {
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 1rem;
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-  top: 0;
-  left: 0;
+/* ... existing code ... */
+
+/* Update icon colors */
+.bx {
+  color: #6c2bd9 !important;
 }
 
-/* Logo styling - increased size */
-.topbar-logo-header {
-  display: flex;
-  align-items: center;
-  margin-right: 25px; /* Added space between logo and other elements */
+.fa-solid,
+.fas {
+  color: #6c2bd9 !important;
 }
 
-.logo-icon {
-  width: 65px !important; /* Increased from 50px */
-  height: 65px !important; /* Increased from 50px */
-  object-fit: contain;
-  margin-right: 5px;
+.notify i {
+  color: #6c2bd9 !important;
 }
 
-.logo-text {
-  margin-left: 10px;
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #6c757d;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.mobile-toggle-menu i {
+  color: #6c2bd9 !important;
+  font-size: 1.5rem;
 }
 
-/* Center the search bar and make it smaller */
-.search-bar {
-  max-width: 400px;
-  margin: 0 auto;
+.search-show i,
+.search-close i {
+  color: #6c2bd9 !important;
 }
 
-.search-bar-box {
-  width: 100%;
+.dropdown-item i {
+  color: #6c2bd9 !important;
 }
 
-.search-control {
-  height: 38px;
-  padding-left: 40px;
-  padding-right: 40px;
-  border-radius: 20px;
-  border: 1px solid #e9ecef;
-  background-color: #f8f9fa;
-  transition: all 0.3s ease;
+/* Hover states for icons */
+.nav-link:hover .bx,
+.nav-link:hover .fa-solid,
+.nav-link:hover .fas,
+.dropdown-item:hover i {
+  color: #5a23b5 !important;
 }
 
-.search-control:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  background-color: #fff;
-}
-
-/* Search icons positioning */
-.search-show,
-.search-close {
-  left: 15px;
-  color: #6c757d;
-  cursor: pointer;
-}
-
-.search-close {
-  left: auto;
-  right: 15px;
-  display: none;
-}
-
-/* Notifications and user box styling */
-.top-menu {
-  margin-left: auto;
-}
-
-.alert-count {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 10px;
-  font-weight: 600;
-  color: #fff;
-  background-color: #f62d51;
-}
-
-.nav-link i {
-  font-size: 1.2rem;
-  color: #6c757d;
-}
-
-/* User box styling */
-.user-box {
-  margin-left: 15px;
-}
-
-.user-img {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border: 2px solid #eee;
-}
-
-.user-info {
-  margin-left: 10px;
-}
-
-.user-name {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 0;
-}
-
-.designattion {
-  font-size: 12px;
-  color: #6c757d;
-}
-
-/* Make sure navbar expands properly with the larger logo */
-.navbar-expand {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.navbar {
-  padding: 0;
-  align-items: center;
-  height: 75px; /* Increased height to accommodate larger logo */
-}
-
-/* App boxes in dropdown */
-.app-box {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  margin-bottom: 8px;
-}
-
-.app-box i {
-  font-size: 24px;
-}
-
-.app-title {
-  font-size: 12px;
-  font-weight: 500;
-}
-
-/* Notification dropdown styling */
-.dropdown-menu {
-  padding: 10px;
-  border: none;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-.msg-header {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #e9ecef;
-}
-
-.msg-header-title {
-  margin-bottom: 0;
-  font-weight: 600;
-}
-
-.msg-header-clear {
-  color: #3461ff;
-  cursor: pointer;
-}
-
-.header-notifications-list {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.header-notifications-list a {
-  padding: 10px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.notify {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-.msg-footer {
-  padding: 10px;
-  text-align: center;
-  color: #3461ff;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-/* Responsive adjustments */
-@media (max-width: 991px) {
-  .search-bar {
-    max-width: 300px;
-  }
-}
-
-@media (max-width: 767px) {
-  .topbar-logo-header {
-    max-width: 180px;
-  }
-
-  .logo-text {
-    font-size: 16px;
-  }
-
-  .search-bar {
-    display: none; /* Hide search bar on mobile */
-  }
-
-  .mobile-search-icon {
-    display: block !important;
-  }
-
-  .logo-icon {
-    width: 55px !important; /* Slightly smaller on mobile */
-    height: 55px !important;
-  }
-}
-
-/* Gradient backgrounds for app boxes */
-.bg-gradient-cosmic {
-  background: linear-gradient(135deg, #8e2de2, #4a00e0);
-}
-
-.bg-gradient-burning {
-  background: linear-gradient(135deg, #ff416c, #ff4b2b);
-}
-
-.bg-gradient-lush {
-  background: linear-gradient(135deg, #56ab2f, #a8e063);
-}
+/* ... rest of existing code ... */
 </style>

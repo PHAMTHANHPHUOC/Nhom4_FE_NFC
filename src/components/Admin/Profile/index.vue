@@ -195,4 +195,171 @@ export default {
   methods: {},
 };
 </script>
-<style></style>
+<style scoped>
+.card {
+  border: none;
+  box-shadow: 0 2px 15px rgba(108, 43, 217, 0.1);
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Nav tabs styling */
+.nav-tabs {
+  border-bottom: 2px solid #e2d9f3;
+}
+
+.nav-tabs .nav-link {
+  color: #6c757d;
+  border: none;
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  border: none;
+  color: #6c2bd9;
+}
+
+.nav-tabs .nav-link.active {
+  color: #6c2bd9;
+  background: transparent;
+  border-bottom: 2px solid #6c2bd9;
+}
+
+.tab-icon {
+  color: #6c2bd9;
+}
+
+/* Form controls */
+.form-control {
+  border: 1px solid #e2d9f3;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #6c2bd9;
+  box-shadow: 0 0 0 0.2rem rgba(108, 43, 217, 0.15);
+}
+
+/* Profile image */
+.rounded-circle {
+  border: 2px solid #6c2bd9 !important;
+}
+
+.bg-primary {
+  background-color: #f8f5ff !important;
+}
+
+/* Text styles */
+h4 {
+  color: #333;
+  font-weight: 600;
+}
+
+h6 {
+  color: #333;
+  font-weight: 600;
+}
+
+.text-secondary {
+  color: #6c757d !important;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  color: #6c2bd9;
+  background-color: transparent;
+  border: 2px solid #6c2bd9;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #6c2bd9;
+  border-color: #6c2bd9;
+}
+
+/* Icons */
+.font-18 {
+  font-size: 18px;
+}
+
+/* Divider */
+hr {
+  border-color: #e2d9f3;
+  opacity: 0.5;
+}
+
+/* Utility classes */
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
+.mt-3 {
+  margin-top: 1rem !important;
+}
+
+.me-1 {
+  margin-right: 0.25rem !important;
+}
+
+.px-4 {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+.py-3 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.p-1 {
+  padding: 0.25rem !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f5ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6c2bd9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a23b5;
+}
+</style>
