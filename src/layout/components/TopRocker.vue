@@ -4,14 +4,14 @@
       <div class="topbar-logo-header">
         <div class="">
           <img
-            src="../../../src/assets/images/avatars/logo.jpg"
+            src="../../../src/assets/images/avatars/nfc.png"
             class="logo-icon"
             style="width: 50px; height: 50px"
             alt="logo icon"
           />
         </div>
         <div class="">
-          <h4 class="logo-text">QUẢN LÝ NHÂN SỰ</h4>
+          <h4 style="color: blueviolet">QUẢN LÝ NHÂN SỰ</h4>
         </div>
       </div>
       <div class="mobile-toggle-menu"><i class="bx bx-menu"></i></div>
