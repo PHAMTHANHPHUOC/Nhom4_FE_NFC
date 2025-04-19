@@ -101,6 +101,23 @@ const routes = [
       import("../components/Admin/ThongKe/ThongKeDiemThuong/index.vue"),
     beforeEnter: checkLogin,
   },
+  {
+    path: "/admin/yeu-cau-nghi-phep",
+    component: () => import("../components/Admin/YeuCauNghiPhep/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/bao-cao-vang-di-cong-tac",
+    component: () =>
+      import("../components/Admin/BaoCaoVangDiCongTac/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/quan-ly-yeu-cau-nghi-phep",
+    component: () =>
+      import("../components/Admin/QuanLyYeuCauNghiPhep/index.vue"),
+    beforeEnter: checkLogin,
+  },
 ];
 
 const router = createRouter({
@@ -108,4 +125,4 @@ const router = createRouter({
   routes: routes,
 });
 
-export default router
+export default router;
