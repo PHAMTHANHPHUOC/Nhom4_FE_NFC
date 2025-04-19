@@ -57,6 +57,30 @@ const routes = [
     component: () => import("../components/Admin/LoaiHopDong/index.vue"),
     beforeEnter: checkLogin,
   },
+  {
+    path: "/admin/thong-ke-ca-cham-cong",
+    component: () =>
+      import("../components/Admin/ThongKe/ThongKeCaChamCong/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/thong-ke-diem-kpi-nhan-vien",
+    component: () =>
+      import("../components/Admin/ThongKe/ThongKeDiemKPINhanVien/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/thong-ke-diem-phat",
+    component: () =>
+      import("../components/Admin/ThongKe/ThongKeDiemPhat/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/thong-ke-diem-thuong",
+    component: () =>
+      import("../components/Admin/ThongKe/ThongKeDiemThuong/index.vue"),
+    beforeEnter: checkLogin,
+  },
 ];
 
 const router = createRouter({
