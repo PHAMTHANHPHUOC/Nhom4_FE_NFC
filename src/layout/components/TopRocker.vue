@@ -4,7 +4,7 @@
       <div class="topbar-logo-header">
         <div class="">
           <img
-            src="../../../src/assets/images/icons/logo.jpg"
+            src="../../../src/assets/images/avatars/logo.jpg"
             class="logo-icon"
             style="width: 50px; height: 50px"
             alt="logo icon"

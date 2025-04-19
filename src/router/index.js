@@ -13,13 +13,8 @@ const routes = [
     meta: { layout: "blank" },
   },
   {
-    path: "/admin/phong-ban",
-    component: () => import("../components/Admin/PhongBan/index.vue"),
-    beforeEnter: checkLogin,
-  },
-  {
-    path: "/admin/chuc-vu",
-    component: () => import("../components/Admin/ChucVu/index.vue"),
+    path: "/admin/profile",
+    component: () => import("../components/Admin/Profile/index.vue"),
     beforeEnter: checkLogin,
   },
   {
@@ -28,13 +23,8 @@ const routes = [
     beforeEnter: checkLogin,
   },
   {
-    path: "/admin/tieu-chi-kpi",
-    component: () => import("../components/Admin/TieuChiKpi/index.vue"),
-    beforeEnter: checkLogin,
-  },
-  {
-    path: "/admin/kpi-nhan-vien",
-    component: () => import("../components/Admin/KPINhanVien/index.vue"),
+    path: "/admin/chuc-vu",
+    component: () => import("../components/Admin/ChucVu/index.vue"),
     beforeEnter: checkLogin,
   },
   {
@@ -43,8 +33,13 @@ const routes = [
     beforeEnter: checkLogin,
   },
   {
-    path: "/admin/thuong-va-phat",
-    component: () => import("../components/Admin/ThuongVaPhat/index.vue"),
+    path: "/admin/tieu-chi-kpi",
+    component: () => import("../components/Admin/TieuChiKpi/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/phong-ban",
+    component: () => import("../components/Admin/PhongBan/index.vue"),
     beforeEnter: checkLogin,
   },
   {
@@ -55,6 +50,31 @@ const routes = [
   {
     path: "/admin/loai-hop-dong",
     component: () => import("../components/Admin/LoaiHopDong/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/cham-cong",
+    component: () => import("../components/Admin/ChamCong/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/luong",
+    component: () => import("../components/Admin/Luong/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/luong-theo-thang",
+    component: () => import("../components/Admin/LuongTheoThang/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/kpi-nhan-vien",
+    component: () => import("../components/Admin/KPINhanVien/index.vue"),
+    beforeEnter: checkLogin,
+  },
+  {
+    path: "/admin/thuong-va-phat",
+    component: () => import("../components/Admin/ThuongVaPhat/index.vue"),
     beforeEnter: checkLogin,
   },
   {
@@ -88,4 +108,4 @@ const router = createRouter({
   routes: routes,
 });
 
-export default router;
+export default router
