@@ -6,12 +6,12 @@
           <img
             src="../../../src/assets/images/avatars/nfc.png"
             class="logo-icon"
-            style="width: 50px; height: 50px"
+            style="width: 70px; height: 70px"
             alt="logo icon"
           />
         </div>
         <div class="">
-          <h4 style="color: blueviolet">QUẢN LÝ NHÂN SỰ</h4>
+          <h4 style="color: grey">QLNS</h4>
         </div>
       </div>
       <div class="mobile-toggle-menu"><i class="bx bx-menu"></i></div>
@@ -226,30 +226,30 @@ export default {
 
 /* Update icon colors */
 .bx {
-  color: #6c2bd9 !important;
+  color: black !important;
 }
 
 .fa-solid,
 .fas {
-  color: #6c2bd9 !important;
+  color: black !important;
 }
 
 .notify i {
-  color: #6c2bd9 !important;
+  color: #e2d9f3 !important;
 }
 
 .mobile-toggle-menu i {
-  color: #6c2bd9 !important;
+  color: #e2d9f3 !important;
   font-size: 1.5rem;
 }
 
 .search-show i,
 .search-close i {
-  color: #6c2bd9 !important;
+  color: #e2d9f3 !important;
 }
 
 .dropdown-item i {
-  color: #6c2bd9 !important;
+  color: #e2d9f3 !important;
 }
 
 /* Hover states for icons */
