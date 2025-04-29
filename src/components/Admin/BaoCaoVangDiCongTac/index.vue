@@ -114,16 +114,25 @@
                         {{ item.tinh_trang == 0 ? "Chờ phê duyệt" : item.tinh_trang == 1 ? "Đã phê duyệt" : "Từ chối" }}
                       </span>
                     </td>
-                    <td>{{ item.nguoi_phe_diet === null ? "chưa phê duyệt" : item.nguoi_phe_duyet }}</td>
+                    <td>{{ item.nguoi_phe_duyet === null ? "chưa phê duyệt" : item.nguoi_phe_duyet }}</td>
                     <td class="text-center">
                       <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editModal"
                         @click="Object.assign(editItem, item)">
                         <i class="fas fa-edit"></i>
                       </button>
-                      <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                      <button class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#deleteModal"
                         @click="Object.assign(deleteItem, item)">
                         <i class="fas fa-trash"></i>
                       </button>
+                      <template v-if="item.tinh_trang === 0">
+                        <button class="btn btn-success btn-sm me-1" data-bs-toggle="modal"
+                          data-bs-target="#confirmAcceptModal" @click="Object.assign(changeStatus, item)">
+                          <i class="fas fa-check"></i>
+                        </button>
+                        <button class="btn btn-warning btn-sm" @click="rejectRequest(item.id)">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </template>
                     </td>
                   </tr>
                 </template>
@@ -240,14 +249,7 @@
               <label class="form-label">Ghi chú</label>
               <textarea v-model="editItem.ghi_chu" class="form-control" rows="2"></textarea>
             </div>
-            <div class="mb-3">
-              <label class="form-label">Trạng thái</label>
-              <select v-model="editItem.tinh_trang" class="form-select">
-                <option value="0">Chờ phê duyệt</option>
-                <option value="1">Đã phê duyệt</option>
-                <option value="2">Từ chối</option>
-              </select>
-            </div>
+
             <div class="mb-3" v-if="editItem.trang_thai === 'Đã phê duyệt' || editItem.trang_thai === 'Từ chối'">
               <label class="form-label">Người phê duyệt</label>
               <input v-model="editItem.nguoi_phe_duyet" type="text" class="form-control" />
@@ -303,6 +305,27 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal xác nhận -->
+    <div class="modal fade" id="confirmAcceptModal" tabindex="-1" aria-labelledby="confirmAcceptModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmAcceptModalLabel">Xác nhận yêu cầu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+          </div>
+          <div class="modal-body">
+            Bạn có chắc chắn muốn chấp nhận yêu cầu này không?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="button" class="btn btn-success" @click="changeAccecpt" data-bs-dismiss="modal">Đồng ý</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 <script>
@@ -339,7 +362,7 @@ export default {
       // Edit and delete data
       editItem: {},
       deleteItem: {},
-
+      changeStatus: {},
       // Loading state
       isLoading: false
     };
@@ -444,6 +467,19 @@ export default {
       })
         .then((res) => {
           this.dangKyVangList = res.data.nghiPhep
+        })
+    },
+    changeAccecpt() {
+      axios.post("http://localhost:8000/api/admin/trang-thai-chap-nhan", this.changeStatus, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+        }
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            this.$toast.success(res.data.message);
+            this.fetchDangkyVang();
+          }
         })
     }
   }
