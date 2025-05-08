@@ -58,10 +58,10 @@
                           class="rounded-circle p-1 bg-primary"
                         />
                         <div class="mt-3">
-                          <h4>Nguyễn Quốc Long</h4>
+                          <h4>{{ profile.ho_va_ten }}</h4>
                           <p class="text-secondary mb-1">Nhân Viên</p>
                           <p class="text-muted font-size-sm">
-                            32 Xuân Diệu, Đà Nẵng
+                            {{ profile.dia_chi }}
                           </p>
                         </div>
                       </div>
@@ -77,6 +77,7 @@
                         </div>
                         <div class="col-lg-9 text-secondary">
                           <input
+                            v-model="profile.ho_va_ten"
                             type="text"
                             class="form-control"
                             placeholder="Nhập họ và tên"
@@ -89,6 +90,7 @@
                         </div>
                         <div class="col-lg-9 text-secondary">
                           <input
+                            v-model="profile.email"
                             type="text"
                             class="form-control"
                             placeholder="Nhập email"
@@ -101,6 +103,7 @@
                         </div>
                         <div class="col-lg-9 text-secondary">
                           <input
+                            v-model="profile.so_dien_thoai"
                             type="text"
                             class="form-control"
                             placeholder="Nhập số điện thoại"
@@ -113,6 +116,7 @@
                         </div>
                         <div class="col-lg-9 text-secondary">
                           <input
+                            v-model="profile.dia_chi"
                             type="text"
                             class="form-control"
                             placeholder="Nhập số điện thoại"
@@ -122,7 +126,11 @@
                       <div class="row">
                         <div class="col-lg-3"></div>
                         <div class="col-lg-9 text-secondary">
-                          <button type="button" class="btn btn-primary px-4">
+                          <button
+                            v-on:click="updateProfile()"
+                            type="button"
+                            class="btn btn-primary px-4"
+                          >
                             Lưu
                           </button>
                         </div>
@@ -144,7 +152,8 @@
                 </div>
                 <div class="col-lg-3">
                   <input
-                    type="text"
+                    v-model="update_password.old_password"
+                    type="password"
                     placeholder="Nhập mật khẩu cũ"
                     class="form-control"
                   />
@@ -157,6 +166,7 @@
                 </div>
                 <div class="col-lg-3">
                   <input
+                    v-model="update_password.password"
                     type="password"
                     placeholder="Nhập mật khẩu mới"
                     class="form-control"
@@ -169,13 +179,16 @@
                 </div>
                 <div class="col-lg-3">
                   <input
+                    v-model="update_password.re_password"
                     type="password"
                     placeholder="Nhập lại mật khẩu mới"
                     class="form-control"
                   />
                 </div>
               </div>
-              <button class="btn btn-primary">Lưu</button>
+              <button v-on:click="updateMatKhau()" class="btn btn-primary">
+                Lưu
+              </button>
             </div>
           </div>
         </div>
@@ -185,14 +198,71 @@
 </template>
 <script>
 import axios from "axios";
-
 export default {
   data() {
-    return {};
+    return {
+      profile: {},
+      update_password: {},
+    };
   },
 
-  mounted() {},
-  methods: {},
+  mounted() {
+    this.getProfile();
+  },
+  methods: {
+    getProfile() {
+      axios
+        .get("http://localhost:8000/api/admin/thong-tin", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+          },
+        })
+        .then((res) => {
+          this.profile = res.data.data;
+        });
+    },
+    updateProfile() {
+      axios
+        .post(
+          "http://localhost:8000/api/admin/update-thong-tin",
+          this.profile,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.status) {
+            this.$toast.success(res.data.message);
+            this.getProfile();
+          } else {
+            this.$toast.error(res.data.message);
+          }
+        });
+    },
+    updateMatKhau() {
+      axios
+        .post(
+          "http://localhost:8000/api/admin/update-mat-khau",
+          this.update_password,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.status) {
+            this.$toast.success(res.data.message);
+            this.getProfile();
+            this.update_password = {};
+          } else {
+            this.$toast.error(res.data.message);
+          }
+        });
+    },
+  },
 };
 </script>
 <style scoped>
