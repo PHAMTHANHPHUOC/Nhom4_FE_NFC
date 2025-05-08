@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- Table: NhanVien
 CREATE TABLE NhanVien (
     id_nhan_vien INT PRIMARY KEY,
@@ -43,6 +44,8 @@ CREATE TABLE BangChucDanh (
     trang_thai VARCHAR(20)
 );
 
+=======
+>>>>>>> origin/ThaiTuyenVession02
 -- Table: DangKyVang
 CREATE TABLE DangKyVang (
     id_dang_ky INT PRIMARY KEY,
