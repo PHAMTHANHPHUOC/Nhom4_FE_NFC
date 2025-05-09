@@ -7,7 +7,7 @@
         <div class="col mx-auto">
           <div class="my-4 text-center">
             <img
-              src="https://dzfullstack.com/assets/images/logo-img.png"
+              src="../../../assets/images/avatars/nfc.png"
               width="180"
               alt=""
             />
