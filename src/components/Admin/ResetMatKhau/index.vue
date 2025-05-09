@@ -70,7 +70,6 @@
 import axios from "axios";
 import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ position: "top-right" });
-import baseRequest from "../../../core/baseRequest";
 export default {
   props: ["hash_reset"],
   data() {
