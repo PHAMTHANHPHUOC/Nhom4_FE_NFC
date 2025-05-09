@@ -49,11 +49,12 @@
                         />
                       </div>
                     </div>
-                    <div class="col-12 text-end">
-                      <router-link to="/admin/quen-mat-khau">
-                        <a href="">Quên mật khẩu ?</a>
-                      </router-link>
-                    </div>
+                    <!-- <div class="col-12">
+                                            <label class="form-label">Recaptcha</label>
+                                            <div class="g-recaptcha"
+                                                data-sitekey="6LfILHgqAAAAALvN9yYSUf56SxVvGtMsuhwTYRr7" ref="recaptcha">
+                                            </div>
+                                        </div> -->
                     <div class="d-grid">
                       <button
                         v-on:click="login()"

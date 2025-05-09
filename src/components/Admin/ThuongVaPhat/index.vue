@@ -15,7 +15,7 @@
               <i class="fa-regular fa-file-excel"></i> Xuất Excel
             </button>
             <button
-              type="button" 
+              type="button"
               class="btn btn-primary"
               data-bs-toggle="modal"
               data-bs-target="#themMoiModal"

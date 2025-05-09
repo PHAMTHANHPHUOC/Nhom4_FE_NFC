@@ -13,16 +13,6 @@ const routes = [
     meta: { layout: "blank" },
   },
   {
-    path: "/admin/quen-mat-khau",
-    component: () => import("../components/Admin/QuenMatKhau/index.vue"),
-    meta: { layout: "blank" },
-  },
-  {
-    path: "/lay-lai-mat-khau/:hash_reset",
-    component: () => import("../components/Admin/ResetMatKhau/index.vue"),
-    meta: { layout: "blank" },
-  },
-  {
     path: "/admin/profile",
     component: () => import("../components/Admin/Profile/index.vue"),
     beforeEnter: checkLogin,
