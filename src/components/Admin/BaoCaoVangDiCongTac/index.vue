@@ -444,6 +444,7 @@ export default {
           if (res.status === 201) {
             this.$toast.success(res.data.message);
             this.fetchDangkyVang();
+            this.formData = {};
           }
         })
         .catch((res) => {
