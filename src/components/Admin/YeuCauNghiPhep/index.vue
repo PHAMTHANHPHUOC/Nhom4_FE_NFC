@@ -1,391 +1,458 @@
 <template>
-  <div class="container-fluid py-4">
-    <!-- Header with title and add button -->
-    <div class="card">
-      <div
-        class="card-header d-flex justify-content-between align-items-center"
-      >
-        <h6 class="mb-0"><b>QUẢN LÝ YÊU CẦU NGHỈ PHÉP</b></h6>
-        <div>
-          <button class="btn btn-success me-2">
-            <i class="fa-regular fa-file-excel"></i>Xuất Excel
-          </button>
-          <button
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#themMoiModal"
-          >
-            <i class="fas fa-plus"></i>Tạo yêu cầu mới
-          </button>
+  <div class="row">
+    <!-- Search Section -->
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-3">
+              <label class="form-label fw-bold">Từ ngày</label>
+              <input
+                v-model="searchData.ngay_bat_dau"
+                type="date"
+                class="form-control"
+              />
+            </div>
+            <div class="col-lg-3">
+              <label class="form-label fw-bold">Đến ngày</label>
+              <input
+                v-model="searchData.ngay_ket_thuc"
+                type="date"
+                class="form-control"
+              />
+            </div>
+            <div class="col-lg-3">
+              <label class="form-label fw-bold">Nhân viên</label>
+              <select v-model="searchData.id_nhan_vien" class="form-select">
+                <option value="">Tất cả</option>
+                <option v-for="nv in nhanVienList" :key="nv.id" :value="nv.id">
+                  {{ nv.ho_va_ten }}
+                </option>
+              </select>
+            </div>
+            <div class="col-lg-3">
+              <label class="form-label fw-bold">Loại vắng</label>
+              <select v-model="searchData.id_loai_vang" class="form-select">
+                <option value="">Tất cả</option>
+                <option
+                  v-for="lv in loaiVangList"
+                  :key="lv.id_loai_vang"
+                  :value="lv.id_loai_vang"
+                >
+                  {{ lv.ten_loai_vang }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-lg-3">
+              <label class="form-label fw-bold">Trạng thái</label>
+              <select v-model="searchData.tinh_trang" class="form-select">
+                <option value="">Tất cả</option>
+                <option value="0">Chờ phê duyệt</option>
+                <option value="1">Đã phê duyệt</option>
+                <option value="2">Từ chối</option>
+              </select>
+            </div>
+            <div class="col-lg-3 d-flex align-items-end">
+              <button @click="searchNghiPhep" class="btn btn-primary w-100">
+                <i class="fas fa-search me-2"></i> Tìm kiếm
+              </button>
+            </div>
+            <div class="col-lg-3 d-flex align-items-end">
+              <button
+                class="btn btn-success w-100"
+                data-bs-toggle="modal"
+                data-bs-target="#createModal"
+              >
+                <i class="fas fa-plus me-2"></i> Thêm mới
+              </button>
+            </div>
+            <div class="col-lg-3 d-flex align-items-end">
+              <button @click="exportToExcel" class="btn btn-secondary w-100">
+                <i class="fas fa-file-excel me-2"></i> Xuất Excel
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Table of leave requests -->
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nhân viên</th>
-                <th>Loại nghỉ phép</th>
-                <th>Ngày bắt đầu</th>
-                <th>Ngày kết thúc</th>
-                <th>Số ngày</th>
-                <th>Lý do</th>
-                <th>Trạng thái</th>
-                <th>Người phê duyệt</th>
-                <th>Ngày phê duyệt</th>
-                <th>Ghi chú</th>
-                <th class="text-center">Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template v-for="(v, k) in list_yeu_cau_nghi_phep" :key="k">
+    <!-- Data Table Section -->
+    <div class="col-lg-12 mt-3">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Danh sách đăng ký vắng/công tác</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
                 <tr>
-                  <td>{{ v.id_nhan_vien }}</td>
-                  <td>{{ v.ho_va_ten }}</td>
-                  <td>{{ v.ten_loai_vang }}</td>
-                  <td>{{ v.ngay_bat_dau }}</td>
-                  <td>{{ v.ngay_ket_thuc }}</td>
-                  <td>{{ v.so_ngay_vang }}</td>
-                  <td>{{ v.ly_do }}</td>
-                  <td>
-                    <button
-                      v-if="v.tinh_trang === 0"
-                      class="btn btn-sm btn-outline-warning rounded-pill px-3"
-                    >
-                      Chưa phê duyệt
-                    </button>
-                    <button
-                      v-else
-                      class="btn btn-sm btn-outline-success rounded-pill px-3"
-                    >
-                      <i class="fas fa-check-circle me-1"></i>Đã phê duyệt
-                    </button>
-                  </td>
-                  <td>{{ v.nguoi_phe_duyet }}</td>
-                  <td>{{ v.ngay_phe_duyet }}</td>
-                  <td>{{ v.ghi_chu }}</td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-secondary me-1" title="Sửa">
-                      <i
-                        class="fas fa-edit"
-                        data-bs-toggle="modal"
-                        data-bs-target="#updateModal"
-                        @click="Object.assign(update, v)"
-                      ></i>
-                    </button>
-                    <button
-                      class="btn btn-sm btn-danger"
-                      title="Xóa"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteModal"
-                      @click="Object.assign(del, v)"
-                    >
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </td>
+                  <th class="text-center">#</th>
+                  <th class="text-center">Nhân viên</th>
+                  <th class="text-center">Loại vắng</th>
+                  <th class="text-center">Ngày bắt đầu</th>
+                  <th class="text-center">Ngày kết thúc</th>
+                  <th class="text-center">Số ngày</th>
+                  <th class="text-center">Lý do</th>
+                  <th class="text-center">Trạng thái</th>
+                  <th class="text-center">Người phê duyệt</th>
+                  <th class="text-center">Thao tác</th>
                 </tr>
-              </template>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <template v-if="isLoading">
+                  <tr>
+                    <td colspan="10" class="text-center">
+                      Đang tải dữ liệu...
+                    </td>
+                  </tr>
+                </template>
+                <template v-else-if="dangKyVangList.length === 0">
+                  <tr>
+                    <td colspan="10" class="text-center">Không có dữ liệu</td>
+                  </tr>
+                </template>
+                <template
+                  v-else
+                  v-for="(item, index) in dangKyVangList"
+                  :key="item.id_dang_ky"
+                >
+                  <tr>
+                    <td class="text-center">{{ index + 1 }}</td>
+                    <td>{{ item.ho_va_ten }}</td>
+                    <td>{{ item.ten_loai_vang }}</td>
+                    <td class="text-center">{{ item.ngay_bat_dau }}</td>
+                    <td class="text-center">{{ item.ngay_ket_thuc }}</td>
+                    <td class="text-center">{{ item.so_ngay_vang }}</td>
+                    <td>{{ item.ly_do }}</td>
+                    <td class="text-center">
+                      <span
+                        :class="{
+                          'badge bg-warning': item.tinh_trang === 0,
+                          'badge bg-success': item.tinh_trang === 1,
+                          'badge bg-danger': item.tinh_trang === 2,
+                        }"
+                      >
+                        {{
+                          item.tinh_trang == 0
+                            ? "Chờ phê duyệt"
+                            : item.tinh_trang == 1
+                            ? "Đã phê duyệt"
+                            : "Từ chối"
+                        }}
+                      </span>
+                    </td>
+                    <td>
+                      {{
+                        item.nguoi_phe_diet === null
+                          ? "chưa phê duyệt"
+                          : item.nguoi_phe_diet
+                      }}
+                    </td>
+                    <td class="text-center">
+                      <button
+                        class="btn btn-primary btn-sm me-1"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editModal"
+                        @click="Object.assign(editItem, item)"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        class="btn btn-danger btn-sm me-1"
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteModal"
+                        @click="Object.assign(deleteItem, item)"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Modal Create -->
-  <div
-    class="modal modal-lg fade"
-    id="themMoiModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">YÊU CẦU NGHỈ PHÉP</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="id_nhan_vien" class="form-label">Mã nhân viên</label>
-              <select v-model="create.id_nhan_vien" class="form-control mt-1">
-                <template v-for="(v, k) in nhanVienList" :key="k">
-                  <option v-bind:value="v.id">{{ v.ho_va_ten }}</option>
-                </template>
-              </select>
-            </div>
 
-            <div class="col-md-6">
-              <label for="id_loai_vang" class="form-label"
-                >Loại nghỉ phép</label
-              >
-              <select
-                v-model="create.id_loai_vang"
-                class="form-select"
-                id="id_loai_vang"
-              >
-                <option disabled>Chọn loại nghỉ phép</option>
-                <template v-for="(v, k) in loaiVangList" :key="k">
-                  <option :value="v.id" selected>{{ v.ten_loai_vang }} </option>
-                </template>
-              </select>
-            </div>
+    <!-- Create Modal -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Thêm đăng ký vắng/công tác</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="ngay_bat_dau" class="form-label">Ngày bắt đầu</label>
-              <input
-                v-model="create.ngay_bat_dau"
-                type="date"
-                class="form-control"
-                id="ngay_bat_dau"
-              />
-            </div>
-
-            <div class="col-md-6">
-              <label for="ngay_ket_thuc" class="form-label"
-                >Ngày kết thúc</label
-              >
-              <input
-                v-model="create.ngay_ket_thuc"
-                type="date"
-                class="form-control"
-                id="ngay_ket_thuc"
-              />
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="ly_do" class="form-label">Lý do</label>
-            <textarea
-              v-model="create.ly_do"
-              class="form-control"
-              id="ly_do"
-              rows="3"
-            ></textarea>
-          </div>
-
-          <div class="mb-3">
-            <label for="ghi_chu" class="form-label">Ghi chú</label>
-            <textarea
-              v-model="create.ghi_chu"
-              class="form-control"
-              id="ghi_chu"
-              rows="3"
-            ></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @:click="creareYeuCauVang"
-            data-bs-dismiss="modal"
-          >
-            Thêm Mới
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal Update -->
-  <div
-    class="modal modal-lg fade"
-    id="updateModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">CẬP NHẬT NGHỈ PHÉP</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="id_nhan_vien" class="form-label">Mã nhân viên</label>
-              <select v-model="update.id_nhan_vien" class="form-control mt-1">
-                <template v-for="(v, k) in nhanVienList" :key="k">
-                  <option v-bind:value="v.id">{{ v.ho_va_ten }}</option>
-                </template>
-              </select>
-            </div>
-
-            <div class="col-md-6">
-              <label for="id_loai_vang" class="form-label"
-                >Loại nghỉ phép</label
-              >
-              <select
-                v-model="update.id_loai_vang"
-                class="form-select"
-                id="id_loai_vang"
-              >
-                <option disabled>Chọn loại nghỉ phép</option>
-                <template v-for="(v, k) in loaiVangList" :key="k">
-                  <option :value="v.id" selected>{{ v.ten_loai_vang }} </option>
-                </template>
-              </select>
-            </div>
-          </div>
-
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="ngay_bat_dau" class="form-label">Ngày bắt đầu</label>
-              <input
-                v-model="update.ngay_bat_dau"
-                type="date"
-                class="form-control"
-                id="ngay_bat_dau"
-              />
-            </div>
-
-            <div class="col-md-6">
-              <label for="ngay_ket_thuc" class="form-label"
-                >Ngày kết thúc</label
-              >
-              <input
-                v-model="update.ngay_ket_thuc"
-                type="date"
-                class="form-control"
-                id="ngay_ket_thuc"
-              />
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="ly_do" class="form-label">Lý do</label>
-            <textarea
-              v-model="update.ly_do"
-              class="form-control"
-              id="ly_do"
-              rows="3"
-            ></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="ghi_chu" class="form-label">Ghi chú</label>
-            <textarea
-              v-model="update.ghi_chu"
-              class="form-control"
-              id="ghi_chu"
-              rows="3"
-            ></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @:click="updateYeuCauVang"
-            data-bs-dismiss="modal"
-          >
-            Cập Nhật
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Delete Modal -->
-  <div
-    class="modal fade"
-    id="deleteModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">
-            Xóa Yêu Cầu Nghỉ Phép
-          </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <div
-            class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2"
-          >
-            <div class="d-flex align-items-center">
-              <div class="font-35 text-white">
-                <i class="bx bxs-message-square-x"></i>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Loại vắng</label>
+                <select
+                  v-model="formData.id_loai_vang"
+                  class="form-select"
+                  required
+                >
+                  <option value="">-- Chọn loại vắng --</option>
+                  <option
+                    v-for="lv in loaiVangList"
+                    :key="lv.id_loai_vang"
+                    :value="lv.id"
+                  >
+                    {{ lv.ten_loai_vang }}
+                  </option>
+                </select>
               </div>
-              <div class="ms-1">
-                <h6 class="mb-1 text-white">
-                  Bạn chắc chắc xóa yêu cầu nghỉ phép của nhân viên
-                  <b>{{ del.ho_va_ten }}</b>
-                  chứ !!
-                </h6>
-                <div class="text-white text-nowrap">
-                  <b>LƯU Ý !!!</b> Điều này không thể khôi phục khi ấn xác nhận
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Ngày bắt đầu</label>
+                <input
+                  v-model="formData.ngay_bat_dau"
+                  type="date"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Ngày kết thúc</label>
+                <input
+                  v-model="formData.ngay_ket_thuc"
+                  type="date"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Lý do</label>
+              <textarea
+                v-model="formData.ly_do"
+                class="form-control"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Ghi chú</label>
+              <textarea
+                v-model="formData.ghi_chu"
+                class="form-control"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="createDangKyVang"
+              data-bs-dismiss="modal"
+            >
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cập nhật đăng ký vắng/công tác</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Loại vắng</label>
+                <select
+                  v-model="editItem.id_loai_vang"
+                  class="form-select"
+                  required
+                >
+                  <option value="">-- Chọn loại vắng --</option>
+                  <option
+                    v-for="lv in loaiVangList"
+                    :key="lv.id"
+                    :value="lv.id"
+                  >
+                    {{ lv.ten_loai_vang }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Ngày bắt đầu</label>
+                <input
+                  v-model="editItem.ngay_bat_dau"
+                  type="date"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Ngày kết thúc</label>
+                <input
+                  v-model="editItem.ngay_ket_thuc"
+                  type="date"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Lý do</label>
+              <textarea
+                v-model="editItem.ly_do"
+                class="form-control"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Ghi chú</label>
+              <textarea
+                v-model="editItem.ghi_chu"
+                class="form-control"
+                rows="2"
+              ></textarea>
+            </div>
+
+            <div
+              class="mb-3"
+              v-if="editItem.trang_thai === 1 || editItem.trang_thai === 2"
+            >
+              <label class="form-label">Người phê duyệt</label>
+              <input
+                v-model="editItem.nguoi_phe_duyet"
+                type="text"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="update"
+              data-bs-dismiss="modal"
+            >
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div
+      class="modal fade"
+      id="deleteModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Xóa Chấm Công
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2"
+            >
+              <div class="d-flex align-items-center">
+                <div class="font-35 text-white">
+                  <i class="bx bxs-message-square-x"></i>
+                </div>
+                <div class="ms-1">
+                  <h6 class="mb-1 text-white">
+                    Bạn chắc chắc xóa đăng kí văng của nhân viên
+                    <b>{{ deleteItem.ho_va_ten }}</b>
+                    chứ !!!
+                  </h6>
+                  <div class="text-white text-nowrap">
+                    <b>LƯU Ý !!!</b> Điều này không thể khôi phục khi ấn xác
+                    nhận
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Đóng
-          </button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-bs-dismiss="modal"
-            v-on:click="xoaYeuCauVang(del.id)"
-          >
-            Xác nhận
-          </button>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              v-on:click="xoaDangKyVang(deleteItem.id)"
+            >
+              Xác nhận
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
+
 export default {
+  name: "BaoCaoVangDiCongTac",
   data() {
     return {
-      list_yeu_cau_nghi_phep: [],
-      create: {
+      // Data
+      dangKyVangList: [],
+      loaiVangList: [],
+      nhanVienList: [],
+
+      // Form data
+      formData: {
         id_nhan_vien: "",
         id_loai_vang: "",
         ngay_bat_dau: "",
@@ -393,29 +460,33 @@ export default {
         ly_do: "",
         ghi_chu: "",
       },
-      update: {},
-      del: {},
-      loaiVangList: [],
-      nhanVienList: [],
+
+      // Search data
+      searchData: {
+        ngay_bat_dau: "",
+        ngay_ket_thuc: "",
+        id_nhan_vien: "",
+        id_loai_vang: "",
+        tinh_trang: "",
+      },
+
+      // Edit and delete data
+      editItem: {},
+      deleteItem: {},
+      changeStatus: {},
+      changeStatus2: {},
+      // Loading state
+      isLoading: false,
     };
   },
+
   mounted() {
-    this.loadDataYeuCauNghiPhep();
-    this.fetchLoaiVang();
     this.fetchNhanVien();
+    this.fetchLoaiVang();
+    this.fetchDangkyVang();
   },
+
   methods: {
-    loadDataYeuCauNghiPhep() {
-      axios
-        .get("http://127.0.0.1:8000/api/admin/nghi-phep/data", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
-          },
-        })
-        .then((res) => {
-          this.list_yeu_cau_nghi_phep = res.data.data;
-        });
-    },
     fetchNhanVien() {
       axios
         .get("http://localhost:8000/api/admin/nhan-vien/data", {
@@ -438,37 +509,70 @@ export default {
           this.loaiVangList = res.data.loaiVang;
         });
     },
-    creareYeuCauVang() {
+    createDangKyVang() {
       axios
-        .post("http://127.0.0.1:8000/api/admin/nghi-phep/create", this.create, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
-          },
-        })
+        .post(
+          "http://localhost:8000/api/admin/them-bao-cao-vang",
+          this.formData,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+            },
+          }
+        )
         .then((res) => {
-          if (res.status === 200) {
+          if (res.status === 201) {
             this.$toast.success(res.data.message);
-            this.loadDataYeuCauNghiPhep();
+            this.fetchDangkyVang();
+            this.formData = {};
+          }
+        })
+        .catch((res) => {
+          const errorList = res.response.data.errors;
+          for (const key in errorList) {
+            this.$toast.error(errorList[key][0]);
           }
         });
     },
-    updateYeuCauVang() {
+    fetchDangkyVang() {
       axios
-        .post("http://127.0.0.1:8000/api/admin/nghi-phep/update", this.update, {
+        .get("http://localhost:8000/api/admin/get-bao-cao-vang", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
           },
         })
         .then((res) => {
+          this.dangKyVangList = res.data.nghiPhep;
+        });
+    },
+
+    update() {
+      axios
+        .put(
+          "http://localhost:8000/api/admin/sua-bao-cao-vang",
+          this.editItem,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+            },
+          }
+        )
+        .then((res) => {
           if (res.status === 200) {
             this.$toast.success(res.data.message);
-            this.loadDataYeuCauNghiPhep();
+            this.fetchDangkyVang();
+          }
+        })
+        .catch((res) => {
+          const errorList = res.response.data.errors;
+          for (const key in errorList) {
+            this.$toast.error(errorList[key][0]);
           }
         });
     },
-    xoaYeuCauVang(id) {
+    xoaDangKyVang(id) {
       axios
-        .delete("http://localhost:8000/api/admin/nghi-phep/delete/" + id, {
+        .delete("http://localhost:8000/api/admin/xoa-bao-cao-vang/" + id, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
           },
@@ -476,7 +580,55 @@ export default {
         .then((res) => {
           if (res.status === 200) {
             this.$toast.success(res.data.message);
-            this.loadDataYeuCauNghiPhep();
+            this.fetchDangkyVang();
+          }
+        });
+    },
+    searchNghiPhep() {
+      axios
+        .get("http://localhost:8000/api/admin/get-bao-cao-vang", {
+          params: this.searchData,
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+          },
+        })
+        .then((res) => {
+          this.dangKyVangList = res.data.nghiPhep;
+        });
+    },
+    changeAccecpt() {
+      axios
+        .post(
+          "http://localhost:8000/api/admin/trang-thai-chap-nhan",
+          this.changeStatus,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+            },
+          }
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            this.$toast.success(res.data.message);
+            this.fetchDangkyVang();
+          }
+        });
+    },
+    changeReject() {
+      axios
+        .post(
+          "http://localhost:8000/api/admin/trang-thai-tu-choi",
+          this.changeStatus2,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+            },
+          }
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            this.$toast.success(res.data.message);
+            this.fetchDangkyVang();
           }
         });
     },
@@ -485,7 +637,7 @@ export default {
 </script>
 <style scoped>
 .card {
-  border: none;
+  border: none !important;
   box-shadow: 0 2px 15px rgba(108, 43, 217, 0.1);
   border-radius: 10px;
   margin-bottom: 1.5rem;
@@ -516,7 +668,6 @@ export default {
 label {
   color: #333;
   font-weight: 600;
-  margin-bottom: 0.5rem;
 }
 
 .form-control,
@@ -612,68 +763,9 @@ label {
   background-color: #f8f5ff;
 }
 
-.modal-example {
-  display: block;
-  position: static;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  pointer-events: none;
-}
-
-.modal-content {
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(108, 43, 217, 0.15);
-}
-
-.modal-header {
-  background-color: #f8f5ff;
-  border-bottom: 1px solid #e2d9f3;
-  padding: 1.5rem;
-}
-
-.modal-title {
-  color: #333;
-  font-weight: 600;
-}
-
-.modal-body {
-  padding: 1.5rem;
-}
-
-.modal-footer {
-  border-top: 1px solid #e2d9f3;
-  padding: 1.5rem;
-}
-
 .badge {
   padding: 0.5em 0.8em;
-  border-radius: 6px;
   font-weight: 500;
-}
-
-.bg-warning {
-  background-color: #fff3cd !important;
-  color: #856404 !important;
-}
-
-.bg-success {
-  background-color: #d4edda !important;
-  color: #155724 !important;
-}
-
-.bg-danger {
-  background-color: #f8d7da !important;
-  color: #721c24 !important;
-}
-
-.bg-secondary {
-  background-color: #e2e3e5 !important;
-  color: #383d41 !important;
-}
-
-.btn-sm {
-  padding: 0.4rem 0.6rem;
-  font-size: 0.875rem;
+  border-radius: 6px;
 }
 </style>
