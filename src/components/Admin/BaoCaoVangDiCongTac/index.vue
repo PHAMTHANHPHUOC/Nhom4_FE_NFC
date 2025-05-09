@@ -138,16 +138,6 @@
                         @click="Object.assign(deleteItem, item)">
                         <i class="fas fa-trash"></i>
                       </button>
-                      <template v-if="item.tinh_trang === 0">
-                        <button class="btn btn-success btn-sm me-1" data-bs-toggle="modal"
-                          data-bs-target="#confirmAcceptModal" @click="Object.assign(changeStatus, item)">
-                          <i class="fas fa-check"></i>
-                        </button>
-                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#rejectModal"
-                          @click="Object.assign(changeStatus2, item)">
-                          <i class="fas fa-times"></i>
-                        </button>
-                      </template>
                     </td>
                   </tr>
                 </template>
@@ -313,50 +303,7 @@
       </div>
     </div>
 
-    <!-- Modal xác nhận -->
-    <div class="modal fade" id="confirmAcceptModal" tabindex="-1" aria-labelledby="confirmAcceptModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="confirmAcceptModalLabel">
-              Xác nhận yêu cầu
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-          </div>
-          <div class="modal-body">
-            Bạn có chắc chắn muốn chấp nhận yêu cầu này không?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Hủy
-            </button>
-            <button type="button" class="btn btn-success" @click="changeAccecpt" data-bs-dismiss="modal">
-              Đồng ý
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="rejectModalLabel">Xác nhận từ chối</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>Bạn có chắc chắn muốn từ chối yêu cầu của nhân viên <b>{{ changeStatus.ho_va_ten }}</b> không?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="button" class="btn btn-warning" @click="changeReject" data-bs-dismiss="modal">Xác
-              nhận</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
