@@ -59,7 +59,9 @@
                         />
                         <div class="mt-3">
                           <h4>{{ profile.ho_va_ten }}</h4>
-                          <p class="text-secondary mb-1">Nhân Viên</p>
+                          <p class="text-secondary mb-1">
+                            {{ list_chuc_vu.ten_chuc_vu }}
+                          </p>
                           <p class="text-muted font-size-sm">
                             {{ profile.dia_chi }}
                           </p>
@@ -203,13 +205,39 @@ export default {
     return {
       profile: {},
       update_password: {},
+      list_chuc_vu: {},
     };
   },
 
   mounted() {
     this.getProfile();
+    this.loadChucVu();
   },
   methods: {
+    loadChucVu() {
+      axios
+        .get("http://127.0.0.1:8000/api/admin/chuc-vu/data-profile", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+          },
+        })
+        .then((res) => {
+          this.list_chuc_vu = res.data.data;
+          this.list_chuc_vu.forEach((value, index) => {
+            var item = {
+              id: value.id,
+              pid: value.id_chuc_vu_cha ?? null,
+              name: value.ten_chuc_vu,
+              title: value.ten_chuc_vu,
+            };
+            this.nodes.push(item);
+          });
+          this.mytree(this.$refs.tree, this.nodes);
+          if (res.data.status == 0) {
+            this.$toast.error(res.data.message);
+          }
+        });
+    },
     getProfile() {
       axios
         .get("http://localhost:8000/api/admin/thong-tin", {

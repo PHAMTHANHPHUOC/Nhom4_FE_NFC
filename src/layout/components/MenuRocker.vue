@@ -186,25 +186,18 @@
           </a>
           <ul class="dropdown-menu">
             <li>
-              <router-link to="/admin/yeu-cau-nghi-phep">
-                <a class="dropdown-item" href="/admin/yeu-cau-nghi-phep"
-                  ><i class="bx bx-right-arrow-alt"></i>Yêu cầu nghĩ phép</a
-                >
-              </router-link>
-            </li>
-            <li>
               <router-link to="/admin/bao-cao-vang-di-cong-tac">
                 <a class="dropdown-item" href="/admin/bao-cao-vang-di-cong-tac"
-                  ><i class="bx bx-right-arrow-alt"></i>Báo cáo vắng đi công
-                  tác</a
-                >
+                  ><i class="bx bx-right-arrow-alt"></i>Xin Nghĩ Phép Và Báo Cáo
+                  Vắng Đi Công Tác
+                </a>
               </router-link>
             </li>
             <li>
               <router-link to="/admin/quan-ly-yeu-cau-nghi-phep">
                 <a class="dropdown-item" href="/admin/quan-ly-yeu-cau-nghi-phep"
                   ><i class="bx bx-right-arrow-alt"></i>Quản lý yêu cầu nghĩ
-                  phép</a
+                  phép Và Báo Cáo Vắng Đi Công Tác</a
                 >
               </router-link>
             </li>

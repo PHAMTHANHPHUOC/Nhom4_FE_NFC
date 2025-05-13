@@ -371,6 +371,25 @@ export default {
         },
       });
     },
+    loadChucNang(value) {
+      this.phan_quyen_nhan_vien = value;
+      axios
+        .post(
+          "http://127.0.0.1:8000/api/admin/chuc-nang/data",
+          this.phan_quyen_nhan_vien,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+            },
+          }
+        )
+        .then((res) => {
+          this.list_chuc_nang = res.data.data;
+          if (res.data.status == 0) {
+            this.$toast.error(res.data.message);
+          }
+        });
+    },
     removeQuyen(value) {
       value.id_nhan_vien = this.phan_quyen_nhan_vien.id;
       axios

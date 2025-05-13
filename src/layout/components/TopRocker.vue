@@ -126,8 +126,7 @@
             alt="user avatar"
           />
           <div class="user-info ps-3">
-            <p class="user-name mb-0">Tên Người Dùng</p>
-            <p class="designattion mb-0">Admin</p>
+            <p class="user-name mb-0">{{ profile.ho_va_ten }}</p>
           </div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
@@ -163,12 +162,25 @@ export default {
   data() {
     return {
       list: [],
+      profile: {},
     };
   },
   mounted() {
     this.loadThongBao();
+    this.getProfile();
   },
   methods: {
+    getProfile() {
+      axios
+        .get("http://localhost:8000/api/admin/thong-tin", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+          },
+        })
+        .then((res) => {
+          this.profile = res.data.data;
+        });
+    },
     loadThongBao() {
       axios
         .post(

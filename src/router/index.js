@@ -111,11 +111,7 @@ const routes = [
       import("../components/Admin/ThongKe/ThongKeDiemThuong/index.vue"),
     beforeEnter: checkLogin,
   },
-  {
-    path: "/admin/yeu-cau-nghi-phep",
-    component: () => import("../components/Admin/YeuCauNghiPhep/index.vue"),
-    beforeEnter: checkLogin,
-  },
+
   {
     path: "/admin/bao-cao-vang-di-cong-tac",
     component: () =>

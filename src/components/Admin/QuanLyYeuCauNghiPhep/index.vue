@@ -167,22 +167,6 @@
                       >
                         <i class="fas fa-trash"></i>
                       </button>
-                      <template v-if="item.tinh_trang === 0">
-                        <button
-                          class="btn btn-success btn-sm me-1"
-                          data-bs-toggle="modal"
-                          data-bs-target="#confirmAcceptModal"
-                          @click="Object.assign(changeStatus, item)"
-                        >
-                          <i class="fas fa-check"></i>
-                        </button>
-                        <button
-                          class="btn btn-warning btn-sm"
-                          @click="rejectRequest(item.id)"
-                        >
-                          <i class="fas fa-times"></i>
-                        </button>
-                      </template>
                     </td>
                   </tr>
                 </template>
@@ -560,10 +544,10 @@ export default {
         )
         .then((res) => {
           if (res.data.status) {
-            toaster.success(res.data.message);
-            this.fetchNhanVien();
+            this.$toast.success(res.data.message);
+            this.fetchDangkyVang();
           } else {
-            toaster.error(res.data.message);
+            this.$toast.error(res.data.message);
           }
         });
     },

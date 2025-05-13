@@ -24,7 +24,7 @@
                     <label class="form-label">Mật khẩu mới</label>
                     <input
                       v-model="lay_lai_mat_khau.password"
-                      type="text"
+                      type="password"
                       class="form-control"
                       placeholder="Nhập mật khẩu của bạn"
                     />
@@ -33,7 +33,7 @@
                     <label class="form-label">Xác nhận mật khẩu</label>
                     <input
                       v-model="lay_lai_mat_khau.re_password"
-                      type="text"
+                      type="password"
                       class="form-control"
                       placeholder="Nhập lại mật khẩu của bạn"
                     />
