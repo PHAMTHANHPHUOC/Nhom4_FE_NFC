@@ -127,6 +127,7 @@
           />
           <div class="user-info ps-3">
             <p class="user-name mb-0">{{ profile.ho_va_ten }}</p>
+            <p class=" text-center">{{ chuc_vu.ten_chuc_vu }}</p>
           </div>
         </a>
         <ul class="dropdown-menu dropdown-menu-end">
@@ -163,13 +164,31 @@ export default {
     return {
       list: [],
       profile: {},
+      chuc_vu: {},
     };
   },
   mounted() {
     this.loadThongBao();
     this.getProfile();
+    this.loadChucVu();
   },
   methods: {
+    loadChucVu() {
+      axios
+        .get("http://127.0.0.1:8000/api/admin/chuc-vu/data-profile", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+          },
+        })
+        .then((res) => {
+          // Lấy phần tử đầu tiên từ mảng data
+          if (res.data.data && res.data.data.length > 0) {
+            this.chuc_vu = res.data.data[0];
+          } else {
+            this.chuc_vu = { ten_chuc_vu: "" }; // Mặc định nếu không có dữ liệu
+          }
+        });
+    },
     getProfile() {
       axios
         .get("http://localhost:8000/api/admin/thong-tin", {

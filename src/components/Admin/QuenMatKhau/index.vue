@@ -46,8 +46,6 @@
 </template>
 <script>
 import axios, { Axios } from "axios";
-import { createToaster } from "@meforma/vue-toaster";
-const toaster = createToaster({ position: "top-right" });
 export default {
   data() {
     return {
@@ -63,9 +61,9 @@ export default {
         )
         .then((res) => {
           if (res.data.status) {
-            toaster.success(res.data.message);
+            this.$toast.success(res.data.message);
           } else {
-            toaster.error(res.data.message);
+            this.$toast.error(res.data.message);
           }
         });
     },

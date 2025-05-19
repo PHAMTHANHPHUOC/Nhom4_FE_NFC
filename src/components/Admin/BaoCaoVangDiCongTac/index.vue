@@ -21,15 +21,7 @@
                 class="form-control"
               />
             </div>
-            <div class="col-lg-3">
-              <label class="form-label fw-bold">Nhân viên</label>
-              <select v-model="searchData.id_nhan_vien" class="form-select">
-                <option value="">Tất cả</option>
-                <option v-for="nv in nhanVienList" :key="nv.id" :value="nv.id">
-                  {{ nv.ho_va_ten }}
-                </option>
-              </select>
-            </div>
+
             <div class="col-lg-3">
               <label class="form-label fw-bold">Loại vắng</label>
               <select v-model="searchData.id_loai_vang" class="form-select">

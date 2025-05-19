@@ -88,11 +88,17 @@ export default {
         )
         .then((res) => {
           if (res.data.status) {
-            toaster.success(res.data.message);
+            this.$toast.success(res.data.message);
             this.$router.push("/dang-nhap");
           } else {
-            toaster.error(res.data.message);
+            this.$toast.error(res.data.message);
           }
+        })
+        .catch((res) => {
+          const errors = Object.values(res.response.data.errors);
+          errors.forEach((v) => {
+            this.$toast.error(v[0]);
+          });
         });
     },
   },

@@ -60,7 +60,7 @@
                         <div class="mt-3">
                           <h4>{{ profile.ho_va_ten }}</h4>
                           <p class="text-secondary mb-1">
-                            {{ list_chuc_vu.ten_chuc_vu }}
+                            {{ chuc_vu.ten_chuc_vu }}
                           </p>
                           <p class="text-muted font-size-sm">
                             {{ profile.dia_chi }}
@@ -205,7 +205,7 @@ export default {
     return {
       profile: {},
       update_password: {},
-      list_chuc_vu: {},
+      chuc_vu: {},
     };
   },
 
@@ -222,19 +222,11 @@ export default {
           },
         })
         .then((res) => {
-          this.list_chuc_vu = res.data.data;
-          this.list_chuc_vu.forEach((value, index) => {
-            var item = {
-              id: value.id,
-              pid: value.id_chuc_vu_cha ?? null,
-              name: value.ten_chuc_vu,
-              title: value.ten_chuc_vu,
-            };
-            this.nodes.push(item);
-          });
-          this.mytree(this.$refs.tree, this.nodes);
-          if (res.data.status == 0) {
-            this.$toast.error(res.data.message);
+          // Lấy phần tử đầu tiên từ mảng data
+          if (res.data.data && res.data.data.length > 0) {
+            this.chuc_vu = res.data.data[0];
+          } else {
+            this.chuc_vu = { ten_chuc_vu: "" }; // Mặc định nếu không có dữ liệu
           }
         });
     },
@@ -283,11 +275,18 @@ export default {
         .then((res) => {
           if (res.data.status) {
             this.$toast.success(res.data.message);
+
             this.getProfile();
             this.update_password = {};
           } else {
             this.$toast.error(res.data.message);
           }
+        })
+        .catch((res) => {
+          const errors = Object.values(res.response.data.errors);
+          errors.forEach((v) => {
+            this.$toast.error(v[0]);
+          });
         });
     },
   },
