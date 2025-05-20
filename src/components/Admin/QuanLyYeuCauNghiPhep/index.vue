@@ -51,7 +51,6 @@
                 <option value="">Tất cả</option>
                 <option value="0">Chờ phê duyệt</option>
                 <option value="1">Đã phê duyệt</option>
-                <option value="2">Từ chối</option>
               </select>
             </div>
             <div class="col-lg-3 d-flex align-items-end">
