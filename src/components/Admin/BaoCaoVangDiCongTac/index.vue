@@ -89,7 +89,7 @@
                   <th class="text-center">Số ngày</th>
                   <th class="text-center">Lý do</th>
                   <th class="text-center">Trạng thái</th>
-                  <th class="text-center">Người phê duyệt</th>
+
                   <th class="text-center">Thao tác</th>
                 </tr>
               </thead>
@@ -136,13 +136,7 @@
                         }}
                       </span>
                     </td>
-                    <td>
-                      {{
-                        item.nguoi_phe_diet === null
-                          ? "chưa phê duyệt"
-                          : item.nguoi_phe_diet
-                      }}
-                    </td>
+
                     <td class="text-center">
                       <button
                         class="btn btn-primary btn-sm me-1"
