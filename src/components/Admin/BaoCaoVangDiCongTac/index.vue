@@ -61,7 +61,7 @@
               </button>
             </div>
             <div class="col-lg-3 d-flex align-items-end">
-              <button @click="exportToExcel" class="btn btn-secondary w-100">
+              <button @click="xuatExcel()" class="btn btn-secondary w-100">
                 <i class="fas fa-file-excel me-2"></i> Xuất Excel
               </button>
             </div>
@@ -528,7 +528,7 @@ export default {
     },
     fetchDangkyVang() {
       axios
-        .get("http://localhost:8000/api/admin/get-bao-cao-vang", {
+        .get("http://localhost:8000/api/nhan-vien/get-bao-cao-vang", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
           },
@@ -541,7 +541,7 @@ export default {
     update() {
       axios
         .put(
-          "http://localhost:8000/api/admin/sua-bao-cao-vang",
+          "http://localhost:8000/api/nhan-vien/sua-bao-cao-vang",
           this.editItem,
           {
             headers: {
@@ -564,7 +564,7 @@ export default {
     },
     xoaDangKyVang(id) {
       axios
-        .delete("http://localhost:8000/api/admin/xoa-bao-cao-vang/" + id, {
+        .delete("http://localhost:8000/api/nhan-vien/xoa-bao-cao-vang/" + id, {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
           },
@@ -622,6 +622,26 @@ export default {
             this.$toast.success(res.data.message);
             this.fetchDangkyVang();
           }
+        });
+    },
+    xuatExcel() {
+      axios
+        .get("http://127.0.0.1:8000/api/admin/bao-cao-vang/xuat-excel", {
+          responseType: "blob",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+          },
+        })
+        .then((res) => {
+          if (res.data.status == false) {
+            this.$toast.error(res.data.message);
+          }
+          const url = window.URL.createObjectURL(new Blob([res.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "bao-cao-vang.xlsx");
+          document.body.appendChild(link);
+          link.click();
         });
     },
   },

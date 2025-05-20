@@ -1,16 +1,16 @@
 <template>
-    <div class="wrapper">
-		<div class="header-wrapper">
-            <TopRocker></TopRocker>
-            <MenuRocker></MenuRocker>
-		</div>
-		<div class="page-wrapper">
-			<div class="page-content">
-                <router-view> </router-view>
-            </div>
-		</div>
-        <BotRocker></BotRocker>
-	</div>
+  <div class="wrapper">
+    <div class="header-wrapper">
+      <TopRocker></TopRocker>
+      <MenuRocker></MenuRocker>
+    </div>
+    <div class="page-wrapper">
+      <div class="page-content">
+        <router-view></router-view>
+      </div>
+    </div>
+    <BotRocker></BotRocker>
+  </div>
 </template>
 <script>
 import TopRocker from "../components/TopRocker.vue";
@@ -25,11 +25,13 @@ import "../../assets/js/index.js";
 import "../../assets/js/app.js";
 import "../../assets/js/pace.min.js";
 export default {
-    name        :   "app",
-    components  :   {
-        TopRocker, MenuRocker, BotRocker
-    }
-}
+  name: "app",
+  components: {
+    TopRocker,
+    MenuRocker,
+    BotRocker,
+  },
+};
 </script>
 <style>
 @import "../../assets/plugins/simplebar/css/simplebar.css";

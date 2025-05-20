@@ -69,7 +69,7 @@
               </button>
             </div>
             <div class="col-lg-3 d-flex align-items-end">
-              <button @click="exportToExcel" class="btn btn-secondary w-100">
+              <button @click="xuatExcel()" class="btn btn-secondary w-100">
                 <i class="fas fa-file-excel me-2"></i> Xuất Excel
               </button>
             </div>
@@ -531,6 +531,26 @@ export default {
   },
 
   methods: {
+    xuatExcel() {
+      axios
+        .get("http://127.0.0.1:8000/api/admin/bao-cao-vang/xuat-excel", {
+          responseType: "blob",
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("tk_nhan_vien"),
+          },
+        })
+        .then((res) => {
+          if (res.data.status == false) {
+            this.$toast.error(res.data.message);
+          }
+          const url = window.URL.createObjectURL(new Blob([res.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "bao-cao-vang.xlsx");
+          document.body.appendChild(link);
+          link.click();
+        });
+    },
     actionKichHoatTaiKhoan(value) {
       axios
         .post(
@@ -606,6 +626,12 @@ export default {
         })
         .then((res) => {
           this.dangKyVangList = res.data.nghiPhep;
+        })
+        .catch((res) => {
+          const errors = Object.values(res.response.data.errors);
+          errors.forEach((v) => {
+            this.$toast.error(v[0]);
+          });
         });
     },
 
@@ -645,6 +671,12 @@ export default {
             this.$toast.success(res.data.message);
             this.fetchDangkyVang();
           }
+        })
+        .catch((res) => {
+          const errors = Object.values(res.response.data.errors);
+          errors.forEach((v) => {
+            this.$toast.error(v[0]);
+          });
         });
     },
     searchNghiPhep() {
@@ -675,6 +707,12 @@ export default {
             this.$toast.success(res.data.message);
             this.fetchDangkyVang();
           }
+        })
+        .catch((res) => {
+          const errors = Object.values(res.response.data.errors);
+          errors.forEach((v) => {
+            this.$toast.error(v[0]);
+          });
         });
     },
   },
