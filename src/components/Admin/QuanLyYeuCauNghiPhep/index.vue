@@ -95,6 +95,7 @@
                   <th class="text-center">Ngày kết thúc</th>
                   <th class="text-center">Số ngày</th>
                   <th class="text-center">Lý do</th>
+                  <th class="text-center">Người Phê Diệt</th>
                   <th class="text-center">Trạng thái</th>
                   <th class="text-center">Thao tác</th>
                 </tr>
@@ -125,6 +126,7 @@
                     <td class="text-center">{{ item.ngay_ket_thuc }}</td>
                     <td class="text-center">{{ item.so_ngay_vang }}</td>
                     <td>{{ item.ly_do }}</td>
+                    <td>{{ item.nguoi_phe_diet }}</td>
                     <td class="text-center">
                       <button
                         v-if="item.tinh_trang == 0"
