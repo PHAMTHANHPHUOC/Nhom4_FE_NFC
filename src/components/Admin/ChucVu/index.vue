@@ -12,6 +12,12 @@
             class="form-control mt-1"
             type="text"
           />
+          <label class="form-lable">Chức Vụ Cha</label>
+          <input
+            v-model="create_chuc_vu.id_chuc_vu_cha"
+            class="form-control mt-1"
+            type="text"
+          />
           <label class="form-lable mt-2"> Tình Trạng</label>
           <select v-model="create_chuc_vu.tinh_trang" class="form-control">
             <option value="1">Hiển Thị</option>
@@ -56,6 +62,9 @@
                     Tên Chức Vụ
                   </th>
                   <th class="text-center align-middle text-nowrap">
+                    Chức vụ cha
+                  </th>
+                  <th class="text-center align-middle text-nowrap">
                     Tình Trạng
                   </th>
                   <th class="text-center align-middle text-nowrap">Action</th>
@@ -69,6 +78,9 @@
                     </th>
                     <td class="align-middle text-nowrap">
                       {{ v.ten_chuc_vu }}
+                    </td>
+                    <td class="align-middle text-nowrap">
+                      {{ v.id_chuc_vu_cha }}
                     </td>
                     <td class="align-middle text-nowrap text-center">
                       <template v-if="v.tinh_trang == 1">
@@ -239,6 +251,12 @@
                 <label class="form-lable">Tên Chức Vụ</label>
                 <input
                   v-model="edit_chuc_vu.ten_chuc_vu"
+                  class="form-control mt-1"
+                  type="text"
+                />
+                <label class="form-lable">Chức Vụ Cha</label>
+                <input
+                  v-model="edit_chuc_vu.id_chuc_vu_cha"
                   class="form-control mt-1"
                   type="text"
                 />
