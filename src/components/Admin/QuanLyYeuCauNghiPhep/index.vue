@@ -7,19 +7,11 @@
           <div class="row">
             <div class="col-lg-3">
               <label class="form-label fw-bold">Từ ngày</label>
-              <input
-                v-model="searchData.ngay_bat_dau"
-                type="date"
-                class="form-control"
-              />
+              <input v-model="searchData.ngay_bat_dau" type="date" class="form-control" />
             </div>
             <div class="col-lg-3">
               <label class="form-label fw-bold">Đến ngày</label>
-              <input
-                v-model="searchData.ngay_ket_thuc"
-                type="date"
-                class="form-control"
-              />
+              <input v-model="searchData.ngay_ket_thuc" type="date" class="form-control" />
             </div>
             <div class="col-lg-3">
               <label class="form-label fw-bold">Nhân viên</label>
@@ -34,11 +26,7 @@
               <label class="form-label fw-bold">Loại vắng</label>
               <select v-model="searchData.id_loai_vang" class="form-select">
                 <option value="">Tất cả</option>
-                <option
-                  v-for="lv in loaiVangList"
-                  :key="lv.id_loai_vang"
-                  :value="lv.id_loai_vang"
-                >
+                <option v-for="lv in loaiVangList" :key="lv.id" :value="lv.id">
                   {{ lv.ten_loai_vang }}
                 </option>
               </select>
@@ -60,11 +48,7 @@
               </button>
             </div>
             <div class="col-lg-3 d-flex align-items-end">
-              <button
-                class="btn btn-success w-100"
-                data-bs-toggle="modal"
-                data-bs-target="#createModal"
-              >
+              <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#createModal">
                 <i class="fas fa-plus me-2"></i> Thêm mới
               </button>
             </div>
@@ -113,11 +97,7 @@
                     <td colspan="10" class="text-center">Không có dữ liệu</td>
                   </tr>
                 </template>
-                <template
-                  v-else
-                  v-for="(item, index) in dangKyVangList"
-                  :key="item.id_dang_ky"
-                >
+                <template v-else v-for="(item, index) in dangKyVangList" :key="item.id_dang_ky">
                   <tr>
                     <td class="text-center">{{ index + 1 }}</td>
                     <td>{{ item.ho_va_ten }}</td>
@@ -127,37 +107,22 @@
                     <td class="text-center">{{ item.so_ngay_vang }}</td>
                     <td>{{ item.ly_do }}</td>
                     <td class="text-center">
-                      <button
-                        v-if="item.tinh_trang == 0"
-                        class="btn btn-warning me-1"
-                        @click="actionKichHoatTaiKhoan(item)"
-                      >
+                      <button v-if="item.tinh_trang == 0" class="btn btn-warning me-1"
+                        @click="actionKichHoatTaiKhoan(item)">
                         Chưa Kích Hoạt
                       </button>
-                      <button
-                        @click="actionKichHoatTaiKhoan(item)"
-                        v-else
-                        class="btn btn-primary me-1"
-                      >
+                      <button @click="actionKichHoatTaiKhoan(item)" v-else class="btn btn-primary me-1">
                         Đã Kích Hoạt
                       </button>
                     </td>
 
                     <td class="text-center">
-                      <button
-                        class="btn btn-primary btn-sm me-1"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editModal"
-                        @click="Object.assign(editItem, item)"
-                      >
+                      <button class="btn btn-primary btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editModal"
+                        @click="Object.assign(editItem, item)">
                         <i class="fas fa-edit"></i>
                       </button>
-                      <button
-                        class="btn btn-danger btn-sm me-1"
-                        data-bs-toggle="modal"
-                        data-bs-target="#deleteModal"
-                        @click="Object.assign(deleteItem, item)"
-                      >
+                      <button class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        @click="Object.assign(deleteItem, item)">
                         <i class="fas fa-trash"></i>
                       </button>
                     </td>
@@ -176,45 +141,24 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Thêm đăng ký vắng/công tác</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Nhân viên</label>
-                <select
-                  v-model="formData.id_nhan_vien"
-                  class="form-select"
-                  required
-                >
+                <select v-model="formData.id_nhan_vien" class="form-select" required>
                   <option value="">-- Chọn nhân viên --</option>
-                  <option
-                    v-for="nv in nhanVienList"
-                    :key="nv.id_nhan_vien"
-                    :value="nv.id"
-                  >
+                  <option v-for="nv in nhanVienList" :key="nv.id_nhan_vien" :value="nv.id">
                     {{ nv.ho_va_ten }}
                   </option>
                 </select>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Loại vắng</label>
-                <select
-                  v-model="formData.id_loai_vang"
-                  class="form-select"
-                  required
-                >
+                <select v-model="formData.id_loai_vang" class="form-select" required>
                   <option value="">-- Chọn loại vắng --</option>
-                  <option
-                    v-for="lv in loaiVangList"
-                    :key="lv.id_loai_vang"
-                    :value="lv.id"
-                  >
+                  <option v-for="lv in loaiVangList" :key="lv.id_loai_vang" :value="lv.id">
                     {{ lv.ten_loai_vang }}
                   </option>
                 </select>
@@ -223,55 +167,27 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Ngày bắt đầu</label>
-                <input
-                  v-model="formData.ngay_bat_dau"
-                  type="date"
-                  class="form-control"
-                  required
-                />
+                <input v-model="formData.ngay_bat_dau" type="date" class="form-control" required />
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Ngày kết thúc</label>
-                <input
-                  v-model="formData.ngay_ket_thuc"
-                  type="date"
-                  class="form-control"
-                  required
-                />
+                <input v-model="formData.ngay_ket_thuc" type="date" class="form-control" required />
               </div>
             </div>
             <div class="mb-3">
               <label class="form-label">Lý do</label>
-              <textarea
-                v-model="formData.ly_do"
-                class="form-control"
-                rows="3"
-                required
-              ></textarea>
+              <textarea v-model="formData.ly_do" class="form-control" rows="3" required></textarea>
             </div>
             <div class="mb-3">
               <label class="form-label">Ghi chú</label>
-              <textarea
-                v-model="formData.ghi_chu"
-                class="form-control"
-                rows="2"
-              ></textarea>
+              <textarea v-model="formData.ghi_chu" class="form-control" rows="2"></textarea>
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Đóng
             </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="createDangKyVang"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-primary" @click="createDangKyVang" data-bs-dismiss="modal">
               Lưu
             </button>
           </div>
@@ -285,81 +201,41 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Cập nhật đăng ký vắng/công tác</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Ngày bắt đầu</label>
-                <input
-                  v-model="editItem.ngay_bat_dau"
-                  type="date"
-                  class="form-control"
-                  required
-                />
+                <input v-model="editItem.ngay_bat_dau" type="date" class="form-control" required />
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Ngày kết thúc</label>
-                <input
-                  v-model="editItem.ngay_ket_thuc"
-                  type="date"
-                  class="form-control"
-                  required
-                />
+                <input v-model="editItem.ngay_ket_thuc" type="date" class="form-control" required />
               </div>
             </div>
             <div class="mb-3">
               <label class="form-label">Lý do</label>
-              <textarea
-                v-model="editItem.ly_do"
-                class="form-control"
-                rows="3"
-                required
-              ></textarea>
+              <textarea v-model="editItem.ly_do" class="form-control" rows="3" required></textarea>
             </div>
             <div class="mb-3">
               <label class="form-label">Ghi chú</label>
-              <textarea
-                v-model="editItem.ghi_chu"
-                class="form-control"
-                rows="2"
-              ></textarea>
+              <textarea v-model="editItem.ghi_chu" class="form-control" rows="2"></textarea>
             </div>
 
-            <div
-              class="mb-3"
-              v-if="
-                editItem.trang_thai === 'Đã phê duyệt' ||
-                  editItem.trang_thai === 'Từ chối'
-              "
-            >
+            <div class="mb-3" v-if="
+              editItem.trang_thai === 'Đã phê duyệt' ||
+              editItem.trang_thai === 'Từ chối'
+            ">
               <label class="form-label">Người phê duyệt</label>
-              <input
-                v-model="editItem.nguoi_phe_duyet"
-                type="text"
-                class="form-control"
-              />
+              <input v-model="editItem.nguoi_phe_duyet" type="text" class="form-control" />
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Đóng
             </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="update"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-primary" @click="update" data-bs-dismiss="modal">
               Lưu
             </button>
           </div>
@@ -368,30 +244,17 @@
     </div>
 
     <!-- Delete Modal -->
-    <div
-      class="modal fade"
-      id="deleteModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">
               Xóa Chấm Công
             </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div
-              class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2"
-            >
+            <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
               <div class="d-flex align-items-center">
                 <div class="font-35 text-white">
                   <i class="bx bxs-message-square-x"></i>
@@ -411,19 +274,11 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Đóng
             </button>
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-              v-on:click="xoaDangKyVang(deleteItem.id)"
-            >
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+              v-on:click="xoaDangKyVang(deleteItem.id)">
               Xác nhận
             </button>
           </div>
@@ -432,43 +287,24 @@
     </div>
 
     <!-- Modal xác nhận -->
-    <div
-      class="modal fade"
-      id="confirmAcceptModal"
-      tabindex="-1"
-      aria-labelledby="confirmAcceptModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="confirmAcceptModal" tabindex="-1" aria-labelledby="confirmAcceptModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="confirmAcceptModalLabel">
               Xác nhận yêu cầu
             </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Đóng"
-            ></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
           </div>
           <div class="modal-body">
             Bạn có chắc chắn muốn chấp nhận yêu cầu này không?
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
               Hủy
             </button>
-            <button
-              type="button"
-              class="btn btn-success"
-              @click="changeAccecpt"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-success" @click="changeAccecpt" data-bs-dismiss="modal">
               Đồng ý
             </button>
           </div>
