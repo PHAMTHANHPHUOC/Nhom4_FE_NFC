@@ -121,7 +121,7 @@
           aria-expanded="false"
         >
           <img
-            src="../../../src/assets/images/avatars/avatar-17.png"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVXfyEhQhRGvOMPozJ9m2y7T3Xul_CUsIPKQ&s"
             class="user-img"
             alt="user avatar"
           />
