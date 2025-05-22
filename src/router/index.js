@@ -4,7 +4,7 @@ import checkLogin from "./checkLogin";
 const routes = [
   {
     path: "/",
-    component: () => import("../layout/wrapper/index.vue"),
+    component: () => import("../components/Admin/Home/index.vue"),
     beforeEnter: checkLogin,
   },
   {

@@ -13,11 +13,11 @@
             type="text"
           />
           <label class="form-lable">Chức Vụ Cha</label>
-          <input
-            v-model="create_chuc_vu.id_chuc_vu_cha"
-            class="form-control mt-1"
-            type="text"
-          />
+          <select v-model="create_chuc_vu.id_chuc_vu_cha" class="form-select">
+            <option v-for="lv in list_chuc_vu" :key="lv.id" :value="lv.id">
+              {{ lv.ten_chuc_vu }}
+            </option>
+          </select>
           <label class="form-lable mt-2"> Tình Trạng</label>
           <select v-model="create_chuc_vu.tinh_trang" class="form-control">
             <option value="1">Hiển Thị</option>
@@ -255,11 +255,18 @@
                   type="text"
                 />
                 <label class="form-lable">Chức Vụ Cha</label>
-                <input
-                  v-model="edit_chuc_vu.id_chuc_vu_cha"
-                  class="form-control mt-1"
-                  type="text"
-                />
+                <select
+                  v-model="create_chuc_vu.id_chuc_vu_cha"
+                  class="form-select"
+                >
+                  <option
+                    v-for="lv in list_chuc_vu"
+                    :key="lv.id"
+                    :value="lv.id"
+                  >
+                    {{ lv.ten_chuc_vu }}
+                  </option>
+                </select>
                 <label class="form-lable mt-2"> Tình Trạng</label>
                 <select v-model="edit_chuc_vu.tinh_trang" class="form-control">
                   <option value="1">Hiển Thị</option>
@@ -380,7 +387,7 @@ export default {
     this.loadChucVu();
   },
   methods: {
-    mytree: function(domEl, x) {
+    mytree: function (domEl, x) {
       this.chart = new OrgChart(domEl, {
         nodes: x,
         nodeBinding: {

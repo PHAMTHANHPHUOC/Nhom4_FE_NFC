@@ -18,22 +18,20 @@
             </div>
             <div class="mb-3">
               <label class="mb-2"> Phòng Ban Cha</label>
-              <input
+              <select
                 v-model="create_phong_ban.id_phong_ban_cha"
-                type="number"
-                class="form-control"
-                placeholder=""
-              />
+                class="form-select"
+              >
+                <option
+                  v-for="lv in list_phong_ban"
+                  :key="lv.id"
+                  :value="lv.id"
+                >
+                  {{ lv.ten_phong_ban }}
+                </option>
+              </select>
             </div>
-            <div class="mb-3">
-              <label class="mb-2">Trưởng Phòng</label>
-              <input
-                v-model="create_phong_ban.id_truong_phong"
-                type="number"
-                class="form-control"
-                placeholder=""
-              />
-            </div>
+
             <div class="mb-3">
               <label class="mb-2">Tình Trạng</label>
               <select
@@ -79,7 +77,6 @@
                 <th class="align-middle">#</th>
                 <th class="align-middle">Tên Phòng Ban</th>
                 <th class="align-middle">Phòng Ban Cha</th>
-                <th class="align-middle">Trưởng phòng</th>
                 <th class="align-middle">Tình Trạng</th>
                 <th class="align-middle">Action</th>
               </tr>
@@ -90,7 +87,7 @@
                   <th class="align-middle">{{ k + 1 }}</th>
                   <td class="align-middle">{{ v.ten_phong_ban }}</td>
                   <td class="align-middle">{{ v.id_phong_ban_cha }}</td>
-                  <td class="align-middle">{{ v.id_truong_phong }}</td>
+                  <!-- <td class="align-middle">{{ v.id_truong_phong }}</td> -->
                   <td class="align-middle text-nowrap text-center">
                     <template v-if="v.tinh_trang == 1">
                       <button
@@ -166,12 +163,18 @@
                 </div>
                 <div class="mb-3">
                   <label class="mb-2"> Phòng Ban Cha</label>
-                  <input
-                    v-model="edit_phong_ban.id_phong_ban_cha"
-                    type="number"
-                    class="form-control"
-                    placeholder=""
-                  />
+                  <select
+                    v-model="create_phong_ban.id_phong_ban_cha"
+                    class="form-select"
+                  >
+                    <option
+                      v-for="lv in list_phong_ban"
+                      :key="lv.id"
+                      :value="lv.id"
+                    >
+                      {{ lv.ten_phong_ban }}
+                    </option>
+                  </select>
                 </div>
                 <div class="mb-3">
                   <label class="mb-2">Trưởng Phòng</label>
